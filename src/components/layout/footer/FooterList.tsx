@@ -1,20 +1,28 @@
-const FooterList = ({
-  title,
-  items,
-  className = "",
-}: {
-  title: string;
-  items: string[];
-  className?: string;
-}) => {
+import FooterListColumn from "./FooterListColumn";
+
+const FooterList = () => {
   return (
-    <div className={`text-gray-800 ${className}`}>
-      <h3 className="text-xl mb-5 text-gray-900">{title}</h3>
-      <ul className="text-sm flex-col space-y-4">
-        {items.map((item, index) => (
-          <li key={index}>{item}</li>
-        ))}
-      </ul>
+    <div className="grid grid-cols-2 sm:grid-cols-3 gap-y-12  col-span-2">
+      {/* TODO: each Item contain the Link & the name */}
+      <FooterListColumn
+        title="Support"
+        items={["Contact Us", "FAQs", "Shipping & Returns"]}
+      />
+      <FooterListColumn
+        title="Services"
+        items={["Order Tracking", "contact Us ", "Sign Up"]}
+      />
+      <FooterListColumn
+        title="Terms and Policies"
+        items={[
+          "About Us",
+          "Terms of Use",
+          "Privacy Policy",
+          "Return Policy",
+          "Cookie Policy",
+        ]}
+        className="col-span-2 sm:col-span-1"
+      />
     </div>
   );
 };
