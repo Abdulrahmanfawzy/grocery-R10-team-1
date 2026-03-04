@@ -1,21 +1,48 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import MainLayout from "./components/layout/MainLayout";
-import CategoryPage from "./pages/Category/CategoryPage";
-import Test from "./pages/Test";
+import ProtectedRoute from "./components/common/ProtectedRoute/ProtectedRoute";
+import CheckoutPage1 from "./pages/Checkout pages/CheckoutPage1";
+import CheckoutPage2 from "./pages/Checkout pages/CheckoutPage2";
+import CheckoutPage3 from "./pages/Checkout pages/CheckoutPage3";
+import CardPage from "./pages/CardPage";
 
 function App() {
   const routers = createBrowserRouter([
     {
-      path: "/",
+      path: "",
       element: <MainLayout />,
       children: [
         {
-          path: "/category",
-          element: <CategoryPage />,
+          path: "checkout-1",
+          element: (
+            <ProtectedRoute>
+              <CheckoutPage1 />
+            </ProtectedRoute>
+          ),
         },
         {
-          path: "test",
-          element: <Test />,
+          path: "checkout-2",
+          element: (
+            <ProtectedRoute>
+              <CheckoutPage2 />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "checkout-3",
+          element: (
+            <ProtectedRoute>
+              <CheckoutPage3 />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "card",
+          element: (
+            <ProtectedRoute>
+              <CardPage />
+            </ProtectedRoute>
+          ),
         },
       ],
     },
