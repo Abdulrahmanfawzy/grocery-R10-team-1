@@ -9,3 +9,7 @@ export const calcDiscountedPrice = (
     parseFloat(price) - (parseFloat(price) * discount) / 100;
   return parseFloat(discountedPrice.toFixed(2));
 };
+
+export const roundRating = (rating: number): number => {
+  return Math.round(rating * 2) / 2;
+};
