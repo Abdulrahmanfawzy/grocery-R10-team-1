@@ -177,3 +177,11 @@ body {
   font-family: "Inter", sans-serif;
   background-color: #fff;
 }
+
+.text-DarkBlue-color {
+  color: #014162;
+
+}
+.background-DarkBlue-color {
+  background-color: #014162;
+}
