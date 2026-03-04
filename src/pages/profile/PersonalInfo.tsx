@@ -1,8 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
+import type { notificationsSection } from "@/lib/types/personalInfo";
 import { ChevronDown, Edit, Mail, Phone, Plus, User } from "lucide-react";
 
-const notificationSections = [
+const notificationSections: notificationsSection[] = [
   {
     title: "Orders Updates",
     items: [
@@ -38,7 +39,7 @@ function PersonalInfo() {
         Manage your personal details and preferences
       </p>
 
-      {/* Profile Picture  */}
+      {/*  Picture  */}
       <div className="mt-8">
         <h3 className="font-semibold">Profile Picture</h3>
         <div className="flex items-center gap-4 mt-2">
@@ -70,7 +71,7 @@ function PersonalInfo() {
           </div>
         </div>
       </div>
-      {/* Profile Picture  */}
+      {/*  Picture  */}
 
       {/* Basic Information */}
       <form className="bg-card rounded-lg border border-border p-6 my-10">
@@ -110,7 +111,7 @@ function PersonalInfo() {
               />
             </div>
           </div>
-
+          
           {/* Last Name */}
           <div>
             <label
@@ -130,6 +131,7 @@ function PersonalInfo() {
               />
             </div>
           </div>
+          {/* Last Name */}
 
           {/* Email */}
           <div>
@@ -150,6 +152,7 @@ function PersonalInfo() {
               />
             </div>
           </div>
+          {/* Email */}
 
           {/* Phone */}
           <div>
@@ -170,6 +173,7 @@ function PersonalInfo() {
               />
             </div>
           </div>
+          {/* Phone */}
         </div>
       </form>
       {/* Basic Information  */}
@@ -198,15 +202,16 @@ function PersonalInfo() {
             <option value="de">German</option>
           </select>
 
-          {/* Custom dropdown arrow */}
+          {/*  dropdown  */}
           <div className="pointer-events-none absolute left-28 top-1/2 -translate-y-1/2">
             <ChevronDown className="w-3 h-3 text-muted-foreground" />
           </div>
+          {/*  dropdown  */}
         </div>
       </form>
       {/* Language */}
 
-      {/* Notification Preference */}
+      {/* Notification  */}
       <div className="bg-card rounded-lg border border-border p-4 mt-7">
         <h2 className="font-semibold text-card-foreground">
           Notification Preference
@@ -246,7 +251,7 @@ function PersonalInfo() {
           </div>
         ))}
       </div>
-      {/* Notification Preference */}
+      {/* Notification  */}
     </div>
   );
 }

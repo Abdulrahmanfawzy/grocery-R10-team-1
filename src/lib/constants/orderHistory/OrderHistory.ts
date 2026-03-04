@@ -1,6 +1,6 @@
 import type { OrderHistory } from "@/lib/types/orderHistory";
 
-const ordersHistory: OrderHistory[] = [
+export const ordersHistory: OrderHistory[] = [
   {
     id: "#GP001",
     date: "Nov 24, 2025",

@@ -24,7 +24,7 @@ function ShoppingInsight() {
           <div key={c.name} className="flex gap-3 space-y-4 items-baseline ">
             <div className="flex-1 bg-muted rounded-full h-2 overflow-hidden">
               <div
-                className={`shadow-blue h-full rounded-full`}
+                className={`bg-[linear-gradient(to_right,transparent_20%,var(--color-primary))] h-full rounded-full`}
                 style={{ width: `${c.pct}%` }}
               />
             </div>

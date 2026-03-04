@@ -1,12 +1,13 @@
-import React, {  type ReactNode } from 'react'
+import type { ReactNode } from "react";
 
-interface ProtectedPaths{
-    children: ReactNode;
-}
-function ProtectedRoute({children}: ProtectedPaths) {
-  return (
-    <div>{children}</div>
-  )
+
+
+interface ProtectedRouteProps {
+  children: ReactNode;
 }
 
-export default ProtectedRoute
+function ProtectedRoute({ children }: ProtectedRouteProps) {
+  return <>{children}</>;
+}
+
+export default ProtectedRoute;
