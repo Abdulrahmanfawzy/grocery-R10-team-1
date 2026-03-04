@@ -1,30 +1,58 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import ProtectedRoute from "./components/common/protectedRoute/ProtectedRoute";
-import ProfileLayout from "./components/layout/profileLayout/ProfileLayout";
-import Dashboard from "./pages/profile/Dashboard";
-import PersonalInfo from "./pages/profile/PersonalInfo";
-import Wallet from "./pages/profile/Wallet";
-import OrderHistory from "./pages/profile/OrderHistory";
+import MainLayout from "./components/layout/MainLayout";
+import ProtectedRoute from "./components/common/ProtectedRoute/ProtectedRoute";
+import CheckoutPage1 from "./pages/Checkout pages/CheckoutPage1";
+import CheckoutPage2 from "./pages/Checkout pages/CheckoutPage2";
+import CheckoutPage3 from "./pages/Checkout pages/CheckoutPage3";
+import CardPage from "./pages/CardPage";
 
-const App = () => {
-    const routers = createBrowserRouter([
-    {path : '' , element : <ProfileLayout/> , children : 
-      [
-      {path : "dashboard" , element : <ProtectedRoute><Dashboard/></ProtectedRoute>},
-      { path: 'info', element: <ProtectedRoute><PersonalInfo/></ProtectedRoute> },
-      { path: 'payments-wallet', element: <ProtectedRoute><Wallet/></ProtectedRoute> },
-      { path: 'order-history', element: <ProtectedRoute><OrderHistory/></ProtectedRoute> },
-    ]
-    }
-      
-    ])
-    
+function App() {
+  const routers = createBrowserRouter([
+    {
+      path: "",
+      element: <MainLayout />,
+      children: [
+        {
+          path: "checkout-1",
+          element: (
+            <ProtectedRoute>
+              <CheckoutPage1 />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "checkout-2",
+          element: (
+            <ProtectedRoute>
+              <CheckoutPage2 />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "checkout-3",
+          element: (
+            <ProtectedRoute>
+              <CheckoutPage3 />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "card",
+          element: (
+            <ProtectedRoute>
+              <CardPage />
+            </ProtectedRoute>
+          ),
+        },
+      ],
+    },
+  ]);
+
   return (
     <div>
       <RouterProvider router={routers}></RouterProvider>
     </div>
-  )
-
-};
+  );
+}
 
 export default App;
