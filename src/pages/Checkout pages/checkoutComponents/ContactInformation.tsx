@@ -2,15 +2,19 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import type { SubmitHandler } from "react-hook-form";
+import { Checkbox } from "@/components/ui/checkbox"
+import { Label } from "@/components/ui/label"
+
+
 const contactSchema = z.object({
-  firstName: z.string().min(1, "First Name is required"), 
-  lastName: z.string().min(1, "Last Name is required"), 
+  firstName: z.string().min(1, "First Name is required"),
+  lastName: z.string().min(1, "Last Name is required"),
   phone: z
     .string()
     .min(10, "Phone number must be at least 10 digits")
     .max(15, "Phone number must be at most 15 digits")
-    .regex(/^[0-9]+$/, "Enter a valid phone number"), 
-  email: z.string().email("Enter a valid email"), 
+    .regex(/^[0-9]+$/, "Enter a valid phone number"),
+  email: z.string().email("Enter a valid email"),
 });
 
 type ContactFormType = z.infer<typeof contactSchema>;
@@ -37,7 +41,7 @@ function ContactInformation() {
 
   return (
     <>
-      <div >
+      <div>
         <h2 className=" text-xl font-medium mb-2 text-gray-700">
           Contact Information
         </h2>
@@ -97,6 +101,10 @@ function ContactInformation() {
             {errors.email && (
               <p className="text-red-500 text-sm">{errors.email.message}</p>
             )}
+          </div>
+          <div className="flex gap-2">
+            <Checkbox id="terms" />
+            <Label className="text-gray-500 font-thin" htmlFor="terms">Create an account for easier check-out next time</Label>
           </div>
         </form>
       </div>
