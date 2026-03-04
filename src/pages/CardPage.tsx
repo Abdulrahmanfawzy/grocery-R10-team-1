@@ -3,6 +3,7 @@ import { GoTrash } from "react-icons/go";
 import { FaPlus } from "react-icons/fa";
 import PromoIcon from "../assets/PromoIcon.svg";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
+import Navbar from "../components/layout/Navbar";
 
 interface Product {
   id: number;
@@ -77,34 +78,37 @@ export default function CardPage(): JSX.Element {
   ];
 
   return (
-    <div className="w-full md:w-[80%] max-w-7xl mx-auto md:px-8 mt-[136px] px-4 pb-[80px] md:pb-0">
-      <h2 className="text-[20px] font-medium leading-1.5 tracking-normal text-[#014162]">
-        <span className="text-[#BCB8B1]">Home/</span>Cart
-      </h2>
-      <div className="mt-[59px]">
-        <h2 className="font-medium text-[20px] leading-1.5 text-[#0E1112]">
-          Products in Cart
+    <>
+      <Navbar />
+      <div className="w-full md:w-[80%] max-w-7xl mx-auto md:px-8 mt-[136px] px-4 pb-[80px] md:pb-0">
+        <h2 className="text-[20px] font-medium leading-1.5 tracking-normal text-[#014162]">
+          <span className="text-[#BCB8B1]">Home/</span>Cart
         </h2>
-        <div className="mt-[20px] flex flex-wrap">
-          <ProductSelector products={products} />
+        <div className="mt-[59px]">
+          <h2 className="font-medium text-[20px] leading-1.5 text-[#0E1112]">
+            Products in Cart
+          </h2>
+          <div className="mt-[20px] flex flex-wrap">
+            <ProductSelector products={products} />
+          </div>
+        </div>
+        {/* OrderSummary hidden on mobile, shown on md+ */}
+        <div className="hidden md:block">
+          <OrderSummary />
+        </div>
+        <MoreToExplore />
+        {/* Mobile-only fixed bottom bar */}
+        <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-[#BCB8B1] p-4 flex items-center justify-between md:hidden z-50">
+          <div>
+            <p className="text-[12px] text-[#6B6F75]">Total</p>
+            <p className="text-[18px] font-bold text-[#0E1112]">£233</p>
+          </div>
+          <button className="bg-[#014162] text-white text-[14px] font-medium py-[14px] px-[32px] rounded-[10px]">
+            Continue To Checkout
+          </button>
         </div>
       </div>
-      {/* OrderSummary hidden on mobile, shown on md+ */}
-      <div className="hidden md:block">
-        <OrderSummary />
-      </div>
-      <MoreToExplore />
-      {/* Mobile-only fixed bottom bar */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-[#BCB8B1] p-4 flex items-center justify-between md:hidden z-50">
-        <div>
-          <p className="text-[12px] text-[#6B6F75]">Total</p>
-          <p className="text-[18px] font-bold text-[#0E1112]">£233</p>
-        </div>
-        <button className="bg-[#014162] text-white text-[14px] font-medium py-[14px] px-[32px] rounded-[10px]">
-          Continue To Checkout
-        </button>
-      </div>
-    </div>
+    </>
   );
 }
 

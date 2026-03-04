@@ -5,6 +5,7 @@ import CheckoutPage1 from "./pages/Checkout pages/CheckoutPage1";
 import CheckoutPage2 from "./pages/Checkout pages/CheckoutPage2";
 import CheckoutPage3 from "./pages/Checkout pages/CheckoutPage3";
 import CardPage from "./pages/CardPage";
+
 function App() {
   const routers = createBrowserRouter([
     {
