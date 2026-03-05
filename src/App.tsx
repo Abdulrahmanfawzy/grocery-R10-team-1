@@ -19,9 +19,13 @@ import Support from "./pages/profile/Support";
 import Settings from "./pages/profile/Settings";
 import ProtectedRoute from "./components/common/ProtectedRoute/ProtectedRoute";
 import CategoryPage from "./pages/Category/CategoryPage";
+<<<<<<< HEAD
 import CartPage from "./pages/CartPage";
 >>>>>>> 2e8e42d99014b7ce91569952883f98231df7f21a
 import ProductList from "./product-list/productlist";
+=======
+import Home from "./pages/Home";
+>>>>>>> ali
 
 function App() {
   const routers = createBrowserRouter([
@@ -31,8 +35,15 @@ function App() {
       children: [
         {
 <<<<<<< HEAD
+<<<<<<< HEAD
           index: true,
 =======
+=======
+          path: "/",
+          element: <Home />,
+        },
+        {
+>>>>>>> 21dcaf69516ef1fcf2c29e1c5500b3b1b4a66130
           path: "category",
           element: <CategoryPage />,
         },

@@ -6,7 +6,7 @@ function MainLayout() {
   return (
     <div>
       <Navbar />
-      <div className="mt-10">
+      <div>
         <Outlet />
       </div>
       <Footer />
