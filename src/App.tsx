@@ -17,6 +17,7 @@ import Support from "./pages/profile/Support";
 import Settings from "./pages/profile/Settings";
 import ProtectedRoute from "./components/common/ProtectedRoute/ProtectedRoute";
 import CategoryPage from "./pages/Category/CategoryPage";
+import Home from "./pages/Home";
 
 function App() {
   const routers = createBrowserRouter([
@@ -24,6 +25,10 @@ function App() {
       path: "/",
       element: <MainLayout />,
       children: [
+        {
+          path: "/",
+          element: <Home />,
+        },
         {
           path: "category",
           element: <CategoryPage />,
