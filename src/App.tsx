@@ -5,6 +5,7 @@ import CheckoutPage1 from "./pages/Checkout pages/CheckoutPage1";
 import CheckoutPage2 from "./pages/Checkout pages/CheckoutPage2";
 import CheckoutPage3 from "./pages/Checkout pages/CheckoutPage3";
 import CardPage from "./pages/CardPage";
+import ProductList from "./product-list/productlist";
 
 function App() {
   const routers = createBrowserRouter([
@@ -12,6 +13,10 @@ function App() {
       path: "",
       element: <MainLayout />,
       children: [
+        {
+          index: true,
+          element: <ProductList />,
+        },
         {
           path: "checkout-1",
           element: (

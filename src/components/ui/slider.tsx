@@ -1,18 +1,5 @@
-<<<<<<< HEAD
-import * as React from "react";
-import * as SliderPrimitive from "@radix-ui/react-slider";
-
-import { cn } from "@/lib/utils";
-
-function Slider({ className, ...props }: React.ComponentProps<typeof SliderPrimitive.Root>) {
-  return (
-    <SliderPrimitive.Root
-      data-slot="slider"
-      className={cn(
-        "relative flex w-full touch-none select-none items-center",
-=======
 import * as React from "react"
-import { Slider as SliderPrimitive } from "radix-ui"
+import * as SliderPrimitive from "@radix-ui/react-slider"
 
 import { cn } from "@/lib/utils"
 
@@ -43,22 +30,10 @@ function Slider({
       max={max}
       className={cn(
         "relative flex w-full touch-none items-center select-none data-[disabled]:opacity-50 data-[orientation=vertical]:h-full data-[orientation=vertical]:min-h-44 data-[orientation=vertical]:w-auto data-[orientation=vertical]:flex-col",
->>>>>>> 035c8ef03bb69e3723846126d2153b85570a75fa
         className
       )}
       {...props}
     >
-<<<<<<< HEAD
-      <SliderPrimitive.Track className="relative h-2 w-full grow overflow-hidden rounded-full bg-primary/20">
-        <SliderPrimitive.Range className="absolute h-full bg-primary" />
-      </SliderPrimitive.Track>
-      <SliderPrimitive.Thumb className="block h-5 w-5 rounded-full bg-primary-foreground shadow focus:outline-none focus:ring-2 focus:ring-ring" />
-    </SliderPrimitive.Root>
-  );
-}
-
-export { Slider };
-=======
       <SliderPrimitive.Track
         data-slot="slider-track"
         className={cn(
@@ -84,4 +59,3 @@ export { Slider };
 }
 
 export { Slider }
->>>>>>> 035c8ef03bb69e3723846126d2153b85570a75fa
