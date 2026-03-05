@@ -1,7 +1,7 @@
-import CategoryCta from "@/components/common/Category/CategoryCta";
-import CategoryMiniSlider from "@/components/common/Category/CategoryMiniSlider";
-import CategorySearch from "@/components/common/Category/CategorySearch";
-import CategorySlider from "@/components/common/Category/CategorySlider";
+import CategoryCta from "@/components/Category/CategoryCta";
+import CategoryMiniSlider from "@/components/Category/CategoryMiniSlider";
+import CategorySearch from "@/components/Category/CategorySearch";
+import CategorySlider from "@/components/Category/CategorySlider";
 import { DummyMeatCategory } from "@/components/data/mocData";
 
 export default function CategoryPage() {

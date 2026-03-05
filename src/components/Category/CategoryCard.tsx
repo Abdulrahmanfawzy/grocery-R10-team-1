@@ -1,7 +1,7 @@
 import type { MeatCategory } from "@/components/Types/Category";
 import { calcDiscountedPrice, roundRating } from "@/lib/utils/helperFn";
 import { Plus, ShoppingCart, Trash2 } from "lucide-react";
-import Rating from "../Rating";
+import Rating from "../common/Rating";
 
 export default function CategoryCard({ meat }: { meat: MeatCategory }) {
   console.log(meat);

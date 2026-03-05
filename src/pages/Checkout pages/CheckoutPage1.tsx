@@ -4,6 +4,7 @@ import ContactInformation from "./checkoutComponents/ContactInformation";
 import CartSummary from "./checkoutComponents/CartSummary";
 import SpecialNotes from "./checkoutComponents/SpecialNotes";
 import CustomizeDelivery from "./checkoutComponents/CustomizeDelivery";
+import PaymentCummery from "./checkoutComponents/PaymentCummery";
 function CheckoutPage1() {
 
   return (
@@ -17,13 +18,18 @@ function CheckoutPage1() {
       </h1>
       <ShippingNavBar />
 
-      <div className=" grid grid-cols-1 md:grid-cols-2 gap-16">
+      <div className=" grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-16">
         <div className=" flex flex-col gap-5">
         <ContactInformation />
         <CustomizeDelivery />
 
         </div>
-        <CartSummary/>
+        <div>
+          <CartSummary/>
+          <PaymentCummery/>
+        </div>
+        
+
       </div>
       <SpecialNotes />
       <button className=" px-4 h-12 background-DarkBlue-color rounded-md text-white mb-4"> Continue Checkout</button>
