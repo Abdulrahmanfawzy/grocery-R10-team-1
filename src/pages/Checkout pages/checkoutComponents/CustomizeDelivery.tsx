@@ -45,31 +45,31 @@ function CustomizeDelivery() {
                 <input
                   type="text"
                   className="w-full border border-gray-300 p-2 rounded"
-                  placeholder=" Villa 14, Street 23, District 5, New Cairo, Cairo 11835 "
+
                 />
               </div>
             </div>
             <div>
               <h2 className=" text-sm font-medium text-gray-700 mb-1 ">
-                Address
+                rovenance
               </h2>
               <div className="flex items-center gap-5">
                 <input
                   type="text"
                   className="w-full border border-gray-300 p-2 rounded"
-                  placeholder=" Villa 14, Street 23, District 5, New Cairo, Cairo 11835 "
+
                 />
               </div>
             </div>
             <div>
               <h2 className=" text-sm font-medium text-gray-700 mb-1 ">
-                Address
+                Postal Code
               </h2>
               <div className="flex items-center gap-5">
                 <input
                   type="text"
                   className="w-full border border-gray-300 p-2 rounded"
-                  placeholder=" Villa 14, Street 23, District 5, New Cairo, Cairo 11835 "
+
                 />
               </div>
             </div>

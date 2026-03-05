@@ -4,6 +4,7 @@ import ContactInformation from "./checkoutComponents/ContactInformation";
 import CartSummary from "./checkoutComponents/CartSummary";
 import SpecialNotes from "./checkoutComponents/SpecialNotes";
 import CustomizeDelivery from "./checkoutComponents/CustomizeDelivery";
+import PaymentCummery from "./checkoutComponents/PaymentCummery";
 function CheckoutPage1() {
 
   return (
@@ -23,7 +24,12 @@ function CheckoutPage1() {
         <CustomizeDelivery />
 
         </div>
-        <CartSummary/>
+        <div>
+          <CartSummary/>
+          <PaymentCummery/>
+        </div>
+        
+
       </div>
       <SpecialNotes />
       <button className=" px-4 h-12 background-DarkBlue-color rounded-md text-white mb-4"> Continue Checkout</button>
