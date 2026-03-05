@@ -6,7 +6,7 @@ const HeroSection = () => {
       <div className="max-w-5xl 2xl:max-w-6xl mx-auto ">
         <div className=" py-12 px-10 flex-1  space-y-24">
           <div>
-            <h1 className="text-[55px] max-w-[600px] font-semibold mb-6 text-balance leading-none">
+            <h1 className="text-[44px] sm:text-[55px] max-w-[600px] font-semibold mb-6 text-balance leading-none">
               Don't miss our daily amazing deals.
             </h1>
             <p className="text-lg ">Save up to 60% off on your firs order</p>
@@ -14,7 +14,7 @@ const HeroSection = () => {
           <Button
             variant="outline"
             size="lg"
-            className="px-12 text-[#253D4E] font-bold bg-[#D9D9D9] hover:bg-gray-300"
+            className="px-12 text-[#253D4E] font-bold bg-[#D9D9D9] hover:bg-white"
           >
             Shop Now
           </Button>

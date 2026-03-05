@@ -16,8 +16,12 @@ import Support from "./pages/profile/Support";
 import Settings from "./pages/profile/Settings";
 import ProtectedRoute from "./components/common/ProtectedRoute/ProtectedRoute";
 import CategoryPage from "./pages/Category/CategoryPage";
+<<<<<<< HEAD
 import CartPage from "./pages/CartPage";
 import ProductList from "./product-list/productlist";
+=======
+import Home from "./pages/Home";
+>>>>>>> ali
 
 function App() {
   const routers = createBrowserRouter([
@@ -25,6 +29,10 @@ function App() {
       path: "/",
       element: <MainLayout />,
       children: [
+        {
+          path: "/",
+          element: <Home />,
+        },
         {
           path: "category",
           element: <CategoryPage />,
