@@ -1,18 +1,20 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import MainLayout from "./components/layout/MainLayout";
-import ProtectedRoute from "./components/common/ProtectedRoute/ProtectedRoute";
 import CheckoutPage1 from "./pages/Checkout pages/CheckoutPage1";
 import CheckoutPage2 from "./pages/Checkout pages/CheckoutPage2";
 import CheckoutPage3 from "./pages/Checkout pages/CheckoutPage3";
 import CardPage from "./pages/CardPage";
-import ProductDetails from "./pages/ProductDetails";
 
 function App() {
   const routers = createBrowserRouter([
     {
-      path: "",
+      path: "/",
       element: <MainLayout />,
       children: [
+        {
+          path: "category",
+          element: <CategoryPage />,
+        },
         {
           path: "checkout-1",
           element: (
@@ -44,10 +46,6 @@ function App() {
               <CardPage />
             </ProtectedRoute>
           ),
-        },
-        {
-          path: "product-details",
-          element: <ProductDetails />,
         },
       ],
     },

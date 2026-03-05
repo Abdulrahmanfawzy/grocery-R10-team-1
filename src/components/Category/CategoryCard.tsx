@@ -1,6 +1,7 @@
 import type { MeatCategory } from "@/components/Types/Category";
-import { calcDiscountedPrice } from "@/lib/utils/helperFn";
+import { calcDiscountedPrice, roundRating } from "@/lib/utils/helperFn";
 import { Plus, ShoppingCart, Trash2 } from "lucide-react";
+import Rating from "../common/Rating";
 
 export default function CategoryCard({ meat }: { meat: MeatCategory }) {
   console.log(meat);
@@ -47,7 +48,7 @@ export default function CategoryCard({ meat }: { meat: MeatCategory }) {
       </div>
 
       <div className="flex items-center gap-2 mt-2">
-        <span className="text-yellow-500">⭐ {meat.rate}</span>
+        <span className="">{<Rating rating={roundRating(meat.rate)} />}</span>
         <span className="text-gray-500 text-sm">({meat.rate})/5 </span>
       </div>
       <div className="mt-4 flex justify-between items-center gap-3">

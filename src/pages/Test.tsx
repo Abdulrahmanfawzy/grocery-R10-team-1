@@ -1,4 +1,4 @@
-import CategorySearch from "@/components/common/Category/CategorySearch";
+import CategorySearch from "@/components/Category/CategorySearch";
 
 const Test = () => {
   return <div></div>;
