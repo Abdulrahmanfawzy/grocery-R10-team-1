@@ -17,7 +17,7 @@ function CheckoutPage1() {
       </h1>
       <ShippingNavBar />
 
-      <div className=" grid grid-cols-1 md:grid-cols-2 gap-16">
+      <div className=" grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-16">
         <div className=" flex flex-col gap-5">
         <ContactInformation />
         <CustomizeDelivery />

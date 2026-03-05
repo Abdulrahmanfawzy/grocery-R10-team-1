@@ -29,7 +29,7 @@ function CreatProductCart({ product }: Props) {
           {product.inStock ? " In Stock" : " Out Of Stock"}
         </h2>
       </div>
-      <div className=" flex flex-col  grow col-span-5 gap-2 ">
+      <div className=" flex flex-col  grow col-span-4 lg:col-span-5 gap-2 ">
         <h2 className=" text-xl font-thin text-gray-900 ">{product.name}</h2>
         <div className=" flex items-center justify-between ">
           <div>
