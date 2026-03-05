@@ -20,10 +20,10 @@ const Loyalty = () => {
       <div className="bg-primary rounded-lg p-6 my-5 text-primary-foreground border-2 border-accent">
         <p className="text-sm opacity-80">Your Points Balance</p>
         <p className="text-4xl font-bold mt-1">2,450</p>
-        <p className="text-sm opacity-70 mt-1">= £ 24.50 in rewards</p>
+        <p className="text-sm opacity-70 mt-1"> £ 24.50 in rewards</p>
         <Button
-          variant="outline"
-          className="mt-3 border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10"
+          variant="secondary"
+          className="mt-3 border-primary-foreground/30 cursor-pointer"
         >
           Redeem Points
         </Button>
@@ -32,7 +32,7 @@ const Loyalty = () => {
       {/* Membership Tier */}
       <div className="bg-card rounded-lg border border-border p-6">
         <div className="flex items-center gap-2 mb-2">
-          <Crown className="w-5 h-5 text-accent" />
+          <Crown className="w-5 h-5 text-primary" />
           <span className="text-sm font-medium text-card-foreground">
             Membership Tier: Gold
           </span>
@@ -45,7 +45,7 @@ const Loyalty = () => {
             2,450 / 10,000 pts
           </span>
         </div>
-        <Progress value={24.5} className="h-2 mb-1" />
+        <Progress  value={50.5} className="h-2 mb-1 [&>div]:bg-[linear-gradient(to_right,transparent_20%,var(--color-primary))]" />
         <p className="text-xs text-muted-foreground mb-4">
           7,550 points to go!
         </p>
