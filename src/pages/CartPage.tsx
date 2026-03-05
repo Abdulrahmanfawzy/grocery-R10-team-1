@@ -3,7 +3,6 @@ import { GoTrash } from "react-icons/go";
 import { FaPlus } from "react-icons/fa";
 import PromoIcon from "../assets/PromoIcon.svg";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
-import Navbar from "../components/layout/Navbar";
 
 interface Product {
   id: number;
@@ -11,7 +10,7 @@ interface Product {
   quantity: number;
   image: string;
 }
-export default function CardPage(): JSX.Element {
+export default function CartPage(): JSX.Element {
   //    add ten product in  product page array.
 
   const products: Product[] = [
@@ -79,7 +78,6 @@ export default function CardPage(): JSX.Element {
 
   return (
     <>
-      <Navbar />
       <div className="w-full md:w-[80%] max-w-7xl mx-auto md:px-8 mt-[136px] px-4 pb-[80px] md:pb-0">
         <h2 className="text-[20px] font-medium leading-1.5 tracking-normal text-[#014162]">
           <span className="text-[#BCB8B1]">Home/</span>Cart

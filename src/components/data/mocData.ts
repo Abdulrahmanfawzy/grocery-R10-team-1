@@ -1,4 +1,11 @@
-import type { CategoryMiniSlider } from "../Types/Category";
+import { Grid2x2, Home } from "lucide-react";
+import type { CategoryMiniSlider, MeatCategory } from "../Types/Category";
+import type { NavBarLink } from "../../lib/types/navigation";
+
+export const DummyNavBarLinks: NavBarLink[] = [
+  { name: "Home", path: "/", icon: Home },
+  { name: "Category", path: "/category", icon: Grid2x2 },
+];
 
 export const DummyCategoryMiniSlider: CategoryMiniSlider[] = [
   {
@@ -31,7 +38,7 @@ export const DummyCategoryMiniSlider: CategoryMiniSlider[] = [
   },
 ];
 
-export const DummyMeatCategory = [
+export const DummyMeatCategory: MeatCategory[] = [
   {
     name: "Meat Packet",
     image: "/assets/category/meat/meat1.png",

@@ -72,7 +72,7 @@ function OrderHistory() {
               </div>
             </div>
 
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col gap-3 md:gap-0 md:flex-row md:items-center justify-between">
               <p className="text-lg font-bold text-primary">{order.total}</p>
               <div className="flex gap-2">
                 <Button size="sm">
