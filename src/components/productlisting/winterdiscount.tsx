@@ -1,12 +1,29 @@
-import { useEffect, useState } from "react";
-import imgleft from "@/assets/group1.png";
-import imgright from "@/assets/group.png";
+import { useCallback, useEffect, useMemo, useState } from "react";
+
+const TimeBox = ({ value }: { value: number }) => {
+    const formatted = value.toString().padStart(2, "0");
+    return (
+        <div className="flex gap-1">
+            {formatted.split("").map((digit, i) => (
+                <div
+                    key={i}
+                    className="w-7 h-10 bg-[#FFFFFF] text-[#000000] flex items-center justify-center rounded-[12px] font-semibold shadow"
+                >
+                    {digit}
+                </div>
+            ))}
+        </div>
+    );
+};
 
 const WinterDiscount = () => {
-    const targetDate = new Date();
-    targetDate.setDate(targetDate.getDate() + 2);
+    const targetDate = useMemo(() => {
+        const date = new Date();
+        date.setDate(date.getDate() + 2);
+        return date;
+    }, []);
 
-    const calculateTimeLeft = () => {
+    const calculateTimeLeft = useCallback(() => {
         const difference = targetDate.getTime() - new Date().getTime();
 
         let timeLeft = {
@@ -26,7 +43,7 @@ const WinterDiscount = () => {
         }
 
         return timeLeft;
-    };
+    }, [targetDate]);
 
     const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
 
@@ -36,23 +53,7 @@ const WinterDiscount = () => {
         }, 1000);
 
         return () => clearInterval(timer);
-    }, []);
-
-    const TimeBox = ({ value }: { value: number }) => {
-        const formatted = value.toString().padStart(2, "0");
-        return (
-            <div className="flex gap-1">
-                {formatted.split("").map((digit, i) => (
-                    <div
-                        key={i}
-                        className="w-7 h-10 bg-[#FFFFFF] text-[#000000] flex items-center justify-center rounded-[12px] font-semibold shadow"
-                    >
-                        {digit}
-                    </div>
-                ))}
-            </div>
-        );
-    };
+    }, [calculateTimeLeft]);
 
     return (
         <section className="w-full bg-[#014162E5] py-16 border-4 border-secondary flex rounded-xl mx-auto my-10">

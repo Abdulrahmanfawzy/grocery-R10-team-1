@@ -108,7 +108,7 @@ const ProductList = () => {
     return (
         <div>
             {/* Hero */}
-            <div className="m-5">Header</div>
+         
             <div className="relative w-full h-\[400px]">
                 <img src={heroImage} alt="Shop" className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-linear-to-r from-primary/90 to-primary/80" />
@@ -224,7 +224,7 @@ const ProductList = () => {
             <div className="w-full px-40 mt-20">
                 <FeaturesBar />
             </div>
-            <div className="m-5">Footer</div>
+          
 
         </div>
     );
