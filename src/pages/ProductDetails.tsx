@@ -309,7 +309,6 @@ export default function ProductDetails(): JSX.Element {
   return (
     <>
       {" "}
-      <Navbar />
       <div className="w-full max-w-[1100px] mx-auto px-4 md:px-8 mt-[100px] pb-[80px]">
         <p className="text-[13px] text-[#A0A0A0] mb-[32px] font-normal">
           <span>Home/ </span>
