@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { menuItems } from "@/lib/constants/sideBar/MockData";
 import { Gift, LogOut, X } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import  { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 interface MobileSidebarProps {
