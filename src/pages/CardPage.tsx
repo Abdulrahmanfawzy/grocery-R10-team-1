@@ -3,7 +3,6 @@ import { GoTrash } from "react-icons/go";
 import { FaPlus } from "react-icons/fa";
 import PromoIcon from "../assets/PromoIcon.svg";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
-import Navbar from "../components/layout/Navbar";
 
 interface Product {
   id: number;

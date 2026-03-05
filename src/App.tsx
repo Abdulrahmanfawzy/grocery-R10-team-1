@@ -4,7 +4,6 @@ import CheckoutPage1 from "./pages/Checkout pages/CheckoutPage1";
 import CheckoutPage2 from "./pages/Checkout pages/CheckoutPage2";
 import CheckoutPage3 from "./pages/Checkout pages/CheckoutPage3";
 import CardPage from "./pages/CardPage";
-import ProtectedRoute from "./components/common/protectedRoute/ProtectedRoute";
 import Dashboard from "./pages/profile/Dashboard";
 import PersonalInfo from "./pages/profile/PersonalInfo";
 import OrderHistory from "./pages/profile/OrderHistory";
@@ -16,6 +15,8 @@ import ProfileLayout from "./components/layout/profileLayout/ProfileLayout";
 import Security from "./pages/profile/Security";
 import Support from "./pages/profile/Support";
 import Settings from "./pages/profile/Settings";
+import ProtectedRoute from "./components/common/ProtectedRoute/ProtectedRoute";
+import CategoryPage from "./pages/Category/CategoryPage";
 
 function App() {
   const routers = createBrowserRouter([
@@ -23,6 +24,10 @@ function App() {
       path: "/",
       element: <MainLayout />,
       children: [
+        {
+          path: "category",
+          element: <CategoryPage />,
+        },
         {
           path: "checkout-1",
           element: (
