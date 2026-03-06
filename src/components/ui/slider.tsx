@@ -1,14 +1,7 @@
-<<<<<<< HEAD
-import * as React from "react"
-import * as SliderPrimitive from "@radix-ui/react-slider"
-
-import { cn } from "@/lib/utils"
-=======
 import * as React from "react";
 import * as SliderPrimitive from "@radix-ui/react-slider";
 
 import { cn } from "@/lib/utils";
->>>>>>> 2e8e42d99014b7ce91569952883f98231df7f21a
 
 function Slider({
   className,
@@ -37,11 +30,7 @@ function Slider({
       max={max}
       className={cn(
         "relative flex w-full touch-none items-center select-none data-[disabled]:opacity-50 data-[orientation=vertical]:h-full data-[orientation=vertical]:min-h-44 data-[orientation=vertical]:w-auto data-[orientation=vertical]:flex-col",
-<<<<<<< HEAD
-        className
-=======
         className,
->>>>>>> 2e8e42d99014b7ce91569952883f98231df7f21a
       )}
       {...props}
     >
@@ -69,8 +58,4 @@ function Slider({
   );
 }
 
-<<<<<<< HEAD
-export { Slider }
-=======
 export { Slider };
->>>>>>> 2e8e42d99014b7ce91569952883f98231df7f21a

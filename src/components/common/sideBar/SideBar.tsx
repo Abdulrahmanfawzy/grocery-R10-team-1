@@ -3,10 +3,7 @@ import { Link } from "react-router-dom";
 import { menuItems } from "@/lib/constants/sideBar/MockData";
 import { Crown } from "lucide-react";
 
-
-
 function SideBar() {
-  
   return (
     <>
       {/* Web  */}
@@ -38,21 +35,25 @@ function SideBar() {
         {/* Sub Routes  */}
         <nav className="py-2 flex flex-col gap-2">
           {menuItems.map((item) => {
-             const isActive = location.pathname === item.path
-            return(
-            <Link
-              to={item.path}
-              key={item.label}
-              className={`w-full flex items-center gap-3 px-3 py-2 rounded transition-all duration-300 ${
-                isActive
-                  ? "bg-primary text-primary-foreground font-medium"
-                  : "text-sidebar-foreground bg-[#F7FCFF] hover:bg-primary hover:text-primary-foreground"
-              }`}
-            >
-              <item.icon className="w-5 h-5" />
-              {item.label}
-            </Link>
-            )
+            const isActive = location.pathname === item.path;
+            return (
+              <Link
+                to={item.path}
+                key={item.label}
+                className={`w-full  translate-x-0 gap-3 px-3 py-2 rounded transition-all duration-300 ${
+                  isActive
+                    ? "bg-primary text-primary-foreground font-medium"
+                    : "text-sidebar-foreground bg-[#F7FCFF] hover:bg-primary hover:text-primary-foreground "
+                }`}
+              >
+                <div
+                  className={` flex items-center gap-3 ${isActive ? "" : "transition-all duration-500 translate-x-0 hover:translate-x-1"}`}
+                >
+                  <item.icon className="w-5 h-5" />
+                  {item.label}
+                </div>
+              </Link>
+            );
           })}
         </nav>
         {/* Sub Routes  */}

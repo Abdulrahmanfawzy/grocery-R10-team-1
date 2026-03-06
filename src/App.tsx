@@ -3,7 +3,10 @@ import MainLayout from "./components/layout/MainLayout";
 import CheckoutPage1 from "./pages/Checkout pages/CheckoutPage1";
 import CheckoutPage2 from "./pages/Checkout pages/CheckoutPage2";
 import CheckoutPage3 from "./pages/Checkout pages/CheckoutPage3";
+<<<<<<< HEAD
 
+=======
+>>>>>>> c8ff959cb7e9663e9796f660c7c58d7c75c236d1
 import Dashboard from "./pages/profile/Dashboard";
 import PersonalInfo from "./pages/profile/PersonalInfo";
 import OrderHistory from "./pages/profile/OrderHistory";
@@ -15,10 +18,15 @@ import ProfileLayout from "./components/layout/profileLayout/ProfileLayout";
 import Security from "./pages/profile/Security";
 import Support from "./pages/profile/Support";
 import Settings from "./pages/profile/Settings";
-import ProtectedRoute from "./components/common/ProtectedRoute/ProtectedRoute";
 import CategoryPage from "./pages/Category/CategoryPage";
+<<<<<<< HEAD
 import Home from "./pages/Home";
 import ProductDetails from "./pages/ProductDetails";
+=======
+import CartPage from "./pages/CartPage";
+import ProductList from "./product-list/productlist";
+import Home from "./pages/Home";
+>>>>>>> c8ff959cb7e9663e9796f660c7c58d7c75c236d1
 
 function App() {
   const routers = createBrowserRouter([
@@ -35,46 +43,49 @@ function App() {
           element: <CategoryPage />,
         },
         {
+<<<<<<< HEAD
+=======
+          path: "products",
+          element: <ProductList />,
+        },
+        {
+>>>>>>> c8ff959cb7e9663e9796f660c7c58d7c75c236d1
           path: "checkout-1",
-          element: (
-            <ProtectedRoute>
-              <CheckoutPage1 />
-            </ProtectedRoute>
-          ),
+          element: <CheckoutPage1 />,
         },
         {
           path: "checkout-2",
-          element: (
-            <ProtectedRoute>
-              <CheckoutPage2 />
-            </ProtectedRoute>
-          ),
+          element: <CheckoutPage2 />,
         },
         {
           path: "checkout-3",
-          element: (
-            <ProtectedRoute>
-              <CheckoutPage3 />
-            </ProtectedRoute>
-          ),
+          element: <CheckoutPage3 />,
         },
         {
+<<<<<<< HEAD
           path: "product-details",
           element: <ProductDetails />,
+=======
+          path: "cart",
+          element: <CartPage />,
+>>>>>>> c8ff959cb7e9663e9796f660c7c58d7c75c236d1
         },
         {
           path: "profile",
-          element: (
-            <ProtectedRoute>
-              <ProfileLayout />
-            </ProtectedRoute>
-          ),
+          element: <ProfileLayout />,
           children: [
+<<<<<<< HEAD
             { index: true, element: <Dashboard /> },
             { path: "dashboard", element: <Dashboard /> },
             { path: "personal-info", element: <PersonalInfo /> },
             { path: "order-history", element: <OrderHistory /> },
             { path: "wallet", element: <Wallet /> },
+=======
+            { path: "dashboard", element: <Dashboard /> },
+            { path: "info", element: <PersonalInfo /> },
+            { path: "orders-history", element: <OrderHistory /> },
+            { path: "payments-wallet", element: <Wallet /> },
+>>>>>>> c8ff959cb7e9663e9796f660c7c58d7c75c236d1
             { path: "smart-list", element: <SmartList /> },
             { path: "addresses", element: <Addresses /> },
             { path: "loyalty", element: <Loyalty /> },
@@ -89,7 +100,7 @@ function App() {
 
   return (
     <div>
-      <RouterProvider router={routers}></RouterProvider>
+      <RouterProvider router={routers} />
     </div>
   );
 }
