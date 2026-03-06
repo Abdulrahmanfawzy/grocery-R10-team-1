@@ -3,8 +3,7 @@ import MainLayout from "./components/layout/MainLayout";
 import CheckoutPage1 from "./pages/Checkout pages/CheckoutPage1";
 import CheckoutPage2 from "./pages/Checkout pages/CheckoutPage2";
 import CheckoutPage3 from "./pages/Checkout pages/CheckoutPage3";
-<<<<<<< HEAD
-import CardPage from "./pages/CardPage";
+
 import Dashboard from "./pages/profile/Dashboard";
 import PersonalInfo from "./pages/profile/PersonalInfo";
 import OrderHistory from "./pages/profile/OrderHistory";
@@ -18,6 +17,8 @@ import Support from "./pages/profile/Support";
 import Settings from "./pages/profile/Settings";
 import ProtectedRoute from "./components/common/ProtectedRoute/ProtectedRoute";
 import CategoryPage from "./pages/Category/CategoryPage";
+import Home from "./pages/Home";
+import ProductDetails from "./pages/ProductDetails";
 
 function App() {
   const routers = createBrowserRouter([
@@ -26,23 +27,12 @@ function App() {
       element: <MainLayout />,
       children: [
         {
-<<<<<<< HEAD
-<<<<<<< HEAD
           index: true,
-=======
-=======
-          path: "/",
           element: <Home />,
         },
         {
->>>>>>> 21dcaf69516ef1fcf2c29e1c5500b3b1b4a66130
           path: "category",
           element: <CategoryPage />,
-        },
-        {
-          path: "products",
->>>>>>> 2e8e42d99014b7ce91569952883f98231df7f21a
-          element: <ProductList />,
         },
         {
           path: "checkout-1",
@@ -69,16 +59,29 @@ function App() {
           ),
         },
         {
-          path: "cart",
-          element: (
-            <ProtectedRoute>
-              <CartPage />
-            </ProtectedRoute>
-          ),
-        },
-        {
           path: "product-details",
           element: <ProductDetails />,
+        },
+        {
+          path: "profile",
+          element: (
+            <ProtectedRoute>
+              <ProfileLayout />
+            </ProtectedRoute>
+          ),
+          children: [
+            { index: true, element: <Dashboard /> },
+            { path: "dashboard", element: <Dashboard /> },
+            { path: "personal-info", element: <PersonalInfo /> },
+            { path: "order-history", element: <OrderHistory /> },
+            { path: "wallet", element: <Wallet /> },
+            { path: "smart-list", element: <SmartList /> },
+            { path: "addresses", element: <Addresses /> },
+            { path: "loyalty", element: <Loyalty /> },
+            { path: "security", element: <Security /> },
+            { path: "support", element: <Support /> },
+            { path: "settings", element: <Settings /> },
+          ],
         },
       ],
     },
