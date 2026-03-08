@@ -6,7 +6,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import CategoryCard from "./CategoryCard";
+import CategoryCard from "../common/MainCard";
 import { DummyMeatCategory } from "@/components/data/mocData";
 
 export default function CategorySlider({
