@@ -1,79 +1,56 @@
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import type { SubmitHandler } from "react-hook-form";
-import { Checkbox } from "@/components/ui/checkbox"
-import { Label } from "@/components/ui/label"
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+
+type Props = {
+  register: any;
+  formState: any;
+};
 
 
-const contactSchema = z.object({
-  firstName: z.string().min(1, "First Name is required"),
-  lastName: z.string().min(1, "Last Name is required"),
-  phone: z
-    .string()
-    .min(10, "Phone number must be at least 10 digits")
-    .max(15, "Phone number must be at most 15 digits")
-    .regex(/^[0-9]+$/, "Enter a valid phone number"),
-  email: z.string().email("Enter a valid email"),
-});
-
-type ContactFormType = z.infer<typeof contactSchema>;
-
-function ContactInformation() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<ContactFormType>({
-    resolver: zodResolver(contactSchema),
-    defaultValues: {
-      firstName: "",
-      lastName: "",
-      phone: "",
-      email: "",
-    },
-  });
-
-  const onSubmit: SubmitHandler<ContactFormType> = (data) => {
-    console.log("Form Data:", data);
-    alert("Form submitted!");
-  };
-
+function ContactInformation({ register, formState }: Props) {
   return (
     <>
       <div>
-        <h2 className=" text-xl font-medium mb-2 text-gray-700">
+        <h2 className=" text-gray-800 font-sans text-lg mb-1">
           Contact Information
         </h2>
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className=" w-full p-6 bg-white border border-gray-300 rounded-md flex flex-col gap-3"
-        >
+        <div className=" w-full p-6 bg-white border border-gray-300 rounded-md flex flex-col gap-3">
           <div className=" grid grid-cols-2 gap-2">
             <div>
               <label className="block mb-1 font-light">First Name</label>
-              <input
-                type="text"
+              <Input
+                aria-invalid={!!formState.errors.firstName}
                 {...register("firstName")}
+                type="text"
                 className="w-full border border-gray-300 p-2 rounded"
               />
-              {errors.firstName && (
-                <p className="text-red-500 text-sm">
-                  {errors.firstName.message}
+              {formState.errors.firstName?.message && (
+                <p
+                  id="specialNotes-error"
+                  role="alert"
+                  className="text-red-500 text-xs mt-1"
+                >
+                  {formState.errors.firstName?.message}
                 </p>
               )}
             </div>
 
             <div>
               <label className="block mb-1 font-light">Last Name</label>
-              <input
-                type="text"
+              <Input
+                aria-invalid={!!formState.errors.lastName}
                 {...register("lastName")}
+                type="text"
                 className="w-full border border-gray-300 p-2 rounded"
               />
-              {errors.lastName && (
-                <p className="text-red-500 text-sm">
-                  {errors.lastName.message}
+              {formState.errors.lastName?.message && (
+                <p
+                  id="specialNotes-error"
+                  role="alert"
+                  className="text-red-500 text-xs mt-1"
+                >
+                  {formState.errors.lastName?.message}
                 </p>
               )}
             </div>
@@ -81,32 +58,44 @@ function ContactInformation() {
 
           <div>
             <label className="block mb-1 font-light">Phone</label>
-            <input
-              type="tel"
+            <Input
+              aria-invalid={!!formState.errors.phone}
               {...register("phone")}
+              type="tel"
               className="w-full border border-gray-300 p-2 rounded"
             />
-            {errors.phone && (
-              <p className="text-red-500 text-sm">{errors.phone.message}</p>
-            )}
+            {formState.errors.phone?.message && (
+                <p
+                  id="specialNotes-error"
+                  role="alert"
+                  className="text-red-500 text-xs mt-1"
+                >
+                  {formState.errors.phone?.message}
+                </p>
+              )}
           </div>
+          
 
           <div>
             <label className="block mb-1 font-light">Email</label>
-            <input
-              type="email"
+            <Input
+            aria-invalid={!!formState.errors.email}
               {...register("email")}
+              type="email"
               className="w-full border border-gray-300 p-2 rounded"
             />
-            {errors.email && (
-              <p className="text-red-500 text-sm">{errors.email.message}</p>
-            )}
+            {formState.errors.email?.message && (
+                <p
+                  id="specialNotes-error"
+                  role="alert"
+                  className="text-red-500 text-xs mt-1"
+                >
+                  {formState.errors.email?.message}
+                </p>
+              )}
+
           </div>
-          <div className="flex gap-2">
-            <Checkbox id="terms" />
-            <Label className="text-gray-500 font-thin" htmlFor="terms">Create an account for easier check-out next time</Label>
-          </div>
-        </form>
+        </div>
       </div>
     </>
   );

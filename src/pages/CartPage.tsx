@@ -139,6 +139,8 @@ function ProductSelector({ products }: { products: Product[] }) {
     </>
   );
 }
+
+
 function ProductItem({ product }: { product: Product }) {
   return (
     <div className="w-full md:h-[130px] border-b border-[#BCB8B1] md:border-none pb-4 md:pb-0">

@@ -1,16 +1,10 @@
-import ShippingNavBar from "./checkoutComponents/ShippingNavBar";
 import CartSummary from "./checkoutComponents/CartSummary";
-import PaymentCummery from "./checkoutComponents/PaymentCummery";
+import PaymentSummery from "./checkoutComponents/PaymentSummery";
+import "../../index.css";
+
 function CheckoutPage2() {
   return (
     <div className=" min-h-screen container  pt-2  w-[95%] md:w-[90%]  mx-auto mb-4 ">
-      <h1 className=" text-sm text-gray-500">
-        Home/Fresh Products/Cart/Checkout
-        <span className=" Color/main ml-1 font-medium text-DarkBlue-color ">
-          (shipping)
-        </span>
-      </h1>
-      <ShippingNavBar />
       <div className="  w-full pl-6 bg-white border border-gray-300 rounded-md p-6 mb-7">
         <h2 className=" text-xl font-medium mb-2 text-gray-700">
           payment Method
@@ -42,7 +36,6 @@ function CheckoutPage2() {
             </div>
             <div className=" flex items-center justify-center mt-3  border border-gray-300 rounded-md p-2">
               +add a new card
-
             </div>
           </div>
           <div>
@@ -93,11 +86,30 @@ function CheckoutPage2() {
         </div>
       </div>
       <div className=" grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-16">
-        <CartSummary />
-        <div className="  w-full pl-6 bg-white border border-gray-300 rounded-md pt-3">
-          <PaymentCummery />
+        <div>
+          <h2 className=" text-gray-800 font-sans text-lg mb-1 ">
+            Order Summary
+          </h2>
+          <div className=" border border-gray-300 rounded-md py-1">
+            <CartSummary />
+          </div>
+        </div>
+
+        <div>
+          <h2 className=" text-gray-800 font-sans text-lg mb-1 ">
+            Payment Summery
+          </h2>
+          <div className="  w-full p-6 bg-white border border-gray-300 rounded-md pt-3">
+            <PaymentSummery />
+          </div>
         </div>
       </div>
+      <button
+        type="submit"
+        className=" px-4 h-12 background-DarkBlue-color rounded-md text-white mb-4 mt-8 "
+      >
+        Confirm Payment & Go To Checkout
+      </button>
     </div>
   );
 }

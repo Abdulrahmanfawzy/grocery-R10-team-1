@@ -1,8 +1,8 @@
 import { currencyFormat } from "@/lib/utils/currencyFormat";
-function PaymentCummery() {
+function PaymentSummery() {
   return (
     <div>
-      <h2 className=" text-xl text-DarkBlue-color font-medium ">Total Amount</h2>
+      <h2 className=" text-lg text-DarkBlue-color font-medium ">Total Amount</h2>
       <div className="">
         <div className=" mt-4 grid grid-cols-2 gap-3 border-b border-gray-500 pb-3 text-gray-600 ">
           <h2>Subtotal</h2>
@@ -20,4 +20,4 @@ function PaymentCummery() {
   );
 }
 
-export default PaymentCummery;
+export default PaymentSummery;

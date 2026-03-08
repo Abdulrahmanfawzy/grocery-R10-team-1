@@ -1,6 +1,6 @@
 import image from "../image/cdd354bafa01896505700013e355f3da0c736913.png";
 import CreatProductCart from "./creatProductCart";
-import PaymentCummery from "./PaymentCummery";
+import "../../../index.css"
 
 interface Product {
   id: number;
@@ -72,18 +72,14 @@ function CartSummary() {
   ];
 
   return (
-    <div >
-      <h2 className=" text-xl font-medium mb-2 text-gray-700">Cart Summary</h2>
 
-      <div className=" w-full pl-6 bg-white border border-gray-300 rounded-md flex flex-col gap-3">
-        <div className="  overflow-y-scroll h-96">
-          {groceryProducts.map((product) => (
-            <CreatProductCart key={product.id} product={product} />
+      <div className=" w-full bg-white  flex flex-col gap-3">
+        <div className="  overflow-y-scroll scrollbar-style h-96">
+          {groceryProducts.map((product , index ) => (
+            <CreatProductCart islastProduct= {index === groceryProducts.length-1} key={product.id} product={product} />
           ))}
         </div>
-
       </div>
-    </div>
   );
 }
 

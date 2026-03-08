@@ -12,25 +12,27 @@ interface Product {
 
 interface Props {
   product: Product;
+  islastProduct : boolean
 }
 
-function CreatProductCart({ product }: Props) {
+function CreatProductCart({ product , islastProduct }: Props , ) {
+  
   const [quantityOrdered, setQuantityOrdered] = useState(1);
 
   return (
-    <div className=" px-4 py-2 w-full h-28 border-b border-gray-400 grid grid-cols-6">
-      <div className=" flex flex-col items-center gap-2 ">
+    <div className={`px-4 py-2 w-full h-28 ${ islastProduct == false && " border-b " } gap-3 border-gray-400 grid grid-cols-4`}>
+      <div className=" flex flex-col  items-center justify-center gap-2 col-span-1 ">
         <img
           className=" rounded-sm w-14 h-14"
           src={product.image}
           alt={product.name}
         />
-        <h2 className=" background-DarkBlue-color text-xs text-white p-1 rounded-tl-lg rounded-br-lg ">
+        <h2 className=" bg-black text-xs font-thin text-white py-0.5 px-1 rounded-tl-lg rounded-br-lg ">
           {product.inStock ? " In Stock" : " Out Of Stock"}
         </h2>
       </div>
-      <div className=" flex flex-col  grow col-span-4 lg:col-span-5 gap-2 ">
-        <h2 className=" text-xl font-thin text-gray-900 ">{product.name}</h2>
+      <div className=" flex flex-col  grow col-span-3  gap-2 ">
+        <h2 className=" text-lg font-thin text-gray-800 ">{product.name}</h2>
         <div className=" flex items-center justify-between ">
           <div>
             <div className=" flex items-center justify-between gap-2 w-24 border border-gray-500 font-bold text-DarkBlue-color p-1 rounded-md">
