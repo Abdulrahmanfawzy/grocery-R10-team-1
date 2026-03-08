@@ -18,6 +18,8 @@ import CategoryPage from "./pages/Category/CategoryPage";
 import CartPage from "./pages/CartPage";
 import ProductList from "./product-list/productlist";
 import Home from "./pages/Home";
+import LoginPage from "./pages/authorization/login/LoginPage";
+import SignUpPage from "./pages/authorization/signup/SignUpPage";
 
 function App() {
   const routers = createBrowserRouter([
@@ -53,6 +55,7 @@ function App() {
           path: "cart",
           element: <CartPage />,
         },
+
         {
           path: "profile",
           element: <ProfileLayout />,
@@ -70,6 +73,14 @@ function App() {
           ],
         },
       ],
+    },
+    {
+      path: "signin",
+      element: <LoginPage />,
+    },
+    {
+      path: "signup",
+      element: <SignUpPage />,
     },
   ]);
 
