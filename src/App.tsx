@@ -21,13 +21,20 @@ import Home from "./pages/Home";
 import LoginPage from "./pages/authorization/login/LoginPage";
 import SignUpPage from "./pages/authorization/signup/SignUpPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Toaster } from "react-hot-toast";
+import ProtectedRoute from "./components/common/ProtectedRoute";
+import PublicRoute from "./components/common/PublicRoute";
 
 function App() {
   const queryClient = new QueryClient();
   const routers = createBrowserRouter([
     {
       path: "/",
-      element: <MainLayout />,
+      element: (
+        <ProtectedRoute>
+          <MainLayout />
+        </ProtectedRoute>
+      ),
       children: [
         {
           index: true,
@@ -78,11 +85,19 @@ function App() {
     },
     {
       path: "signin",
-      element: <LoginPage />,
+      element: (
+        <PublicRoute>
+          <LoginPage />
+        </PublicRoute>
+      ),
     },
     {
       path: "signup",
-      element: <SignUpPage />,
+      element: (
+        <PublicRoute>
+          <SignUpPage />
+        </PublicRoute>
+      ),
     },
   ]);
 
@@ -90,6 +105,30 @@ function App() {
     <div>
       <QueryClientProvider client={queryClient}>
         <RouterProvider router={routers} />
+        <Toaster
+          position="top-right"
+          toastOptions={{
+            duration: 3000,
+            style: {
+              background: "#363636",
+              color: "#fff",
+            },
+            success: {
+              duration: 3000,
+              iconTheme: {
+                primary: "#4ade80",
+                secondary: "#fff",
+              },
+            },
+            error: {
+              duration: 4000,
+              iconTheme: {
+                primary: "#ef4444",
+                secondary: "#fff",
+              },
+            },
+          }}
+        />
       </QueryClientProvider>
     </div>
   );

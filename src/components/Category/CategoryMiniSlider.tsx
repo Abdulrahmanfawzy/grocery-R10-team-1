@@ -1,6 +1,21 @@
 import { DummyCategoryMiniSlider } from "@/components/data/mocData";
+import { getCategories } from "@/lib/api/Categoty";
+import { useEffect } from "react";
 
 export default function CategoryMiniSlider() {
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const categories = await getCategories();
+
+        console.log(categories);
+      } catch (error) {
+        console.error("Failed to fetch categories:", error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
   return (
     <div className="max-w-6xl mx-auto overflow-x-auto scrollbar-hide flex gap-4 py-4 px-2 text-sm snap-x snap-mandatory scroll-smooth">
       {DummyCategoryMiniSlider.map((category, index) => (
