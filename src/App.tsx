@@ -18,6 +18,13 @@ import CategoryPage from "./pages/Category/CategoryPage";
 import CartPage from "./pages/CartPage";
 import ProductList from "./product-list/productlist";
 import Home from "./pages/Home";
+
+import LoginPage from "./pages/authorization/login/LoginPage";
+import SignUpPage from "./pages/authorization/signup/SignUpPage";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Toaster } from "react-hot-toast";
+import ProtectedRoute from "./components/common/ProtectedRoute";
+import PublicRoute from "./components/common/PublicRoute";
 import CheckoutLayOut from "./components/layout/checkout/CheckoutLayOut";
 
 function App() {
@@ -48,7 +55,7 @@ function App() {
           element: <CheckoutLayOut />,
           children: [
             {
-              index: true,
+              index : true ,
               element: <CheckoutPage1 />,
             },
             {
@@ -105,7 +112,33 @@ function App() {
 
   return (
     <div>
-      <RouterProvider router={routers} />
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={routers} />
+        <Toaster
+          position="top-right"
+          toastOptions={{
+            duration: 3000,
+            style: {
+              background: "#363636",
+              color: "#fff",
+            },
+            success: {
+              duration: 3000,
+              iconTheme: {
+                primary: "#4ade80",
+                secondary: "#fff",
+              },
+            },
+            error: {
+              duration: 4000,
+              iconTheme: {
+                primary: "#ef4444",
+                secondary: "#fff",
+              },
+            },
+          }}
+        />
+      </QueryClientProvider>
     </div>
   );
 }
