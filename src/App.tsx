@@ -22,10 +22,15 @@ import CartPage from "./pages/CartPage";
 import ProductList from "./product-list/productlist";
 
 function App() {
+  const queryClient = new QueryClient();
   const routers = createBrowserRouter([
     {
       path: "/",
-      element: <MainLayout />,
+      element: (
+        <ProtectedRoute>
+          <MainLayout />
+        </ProtectedRoute>
+      ),
       children: [
         {
           index: true,
@@ -59,6 +64,7 @@ function App() {
           path: "cart",
           element: <CartPage />,
         },
+
         {
           path: "profile",
           element: <ProfileLayout />,
@@ -82,11 +88,53 @@ function App() {
         },
       ],
     },
+    {
+      path: "signin",
+      element: (
+        <PublicRoute>
+          <LoginPage />
+        </PublicRoute>
+      ),
+    },
+    {
+      path: "signup",
+      element: (
+        <PublicRoute>
+          <SignUpPage />
+        </PublicRoute>
+      ),
+    },
   ]);
 
   return (
     <div>
-      <RouterProvider router={routers} />
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={routers} />
+        <Toaster
+          position="top-right"
+          toastOptions={{
+            duration: 3000,
+            style: {
+              background: "#363636",
+              color: "#fff",
+            },
+            success: {
+              duration: 3000,
+              iconTheme: {
+                primary: "#4ade80",
+                secondary: "#fff",
+              },
+            },
+            error: {
+              duration: 4000,
+              iconTheme: {
+                primary: "#ef4444",
+                secondary: "#fff",
+              },
+            },
+          }}
+        />
+      </QueryClientProvider>
     </div>
   );
 }
