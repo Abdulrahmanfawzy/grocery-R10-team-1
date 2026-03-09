@@ -1,6 +1,5 @@
 import CartSummary from "./checkoutComponents/CartSummary";
-import PaymentCummery from "./checkoutComponents/PaymentSummery";
-import i from "./image/file_00000000e21c722fab7ac08f0882d09d.png";
+import PaymentSummery from "./checkoutComponents/PaymentSummery";
 import "../../index.css";
 import Rating from "@/components/common/Rating";
 
@@ -34,20 +33,17 @@ const chat = (
   </svg>
 );
 
-
-
 function CheckoutPage3() {
   return (
     <div className=" min-h-screen container  pt-2  w-[95%] md:w-[90%]  mx-auto mb-4 ">
-
       <h2 className=" text-xl font-medium  text-gray-700 mb-2">Driver info</h2>
       <div className="  w-full pl-6 bg-white border border-gray-300 rounded-md p-6 mb-7">
         <div className=" flex justify-between ">
           <div className=" flex gap-3">
-            <img className=" rounded-sm w-14 h-14" src={i} alt="" />
+            <img className=" rounded-sm w-14 h-14" src="" alt="" />
             <div className=" flex flex-col gap-2">
               <h2>moaaz hassan </h2>
-              <Rating rating={3} / >
+              <Rating rating={3} />
               <h2 className=" text-DarkBlue-color ">
                 phton number{" "}
                 <span className=" border rounded-sm p-1 text-gray-700 border-gray-400">
@@ -68,9 +64,11 @@ function CheckoutPage3() {
       </div>
 
       <div className=" grid grid-cols-1 md:grid-cols-2 gap-7">
-        <div>
+        <div className=" border border-gray-300 rounded-md pt-1">
           <CartSummary />
-          <PaymentCummery />
+          <div className=" px-5 py-3 border-t border-gray-400 ">
+            <PaymentSummery />
+          </div>
         </div>
         <div>
           <h2 className=" text-xl font-medium  text-gray-700 mb-2">

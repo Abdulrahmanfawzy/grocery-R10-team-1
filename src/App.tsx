@@ -1,8 +1,8 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import MainLayout from "./components/layout/MainLayout";
-import CheckoutPage1 from "./pages/Checkout pages/CheckoutPage1";
-import CheckoutPage2 from "./pages/Checkout pages/CheckoutPage2";
-import CheckoutPage3 from "./pages/Checkout pages/CheckoutPage3";
+import CheckoutPage1 from "./pages/Checkout/CheckoutPage1";
+import CheckoutPage2 from "./pages/Checkout/CheckoutPage2";
+import CheckoutPage3 from "./pages/Checkout/CheckoutPage3";
 import Dashboard from "./pages/profile/Dashboard";
 import PersonalInfo from "./pages/profile/PersonalInfo";
 import OrderHistory from "./pages/profile/OrderHistory";
@@ -18,6 +18,7 @@ import CategoryPage from "./pages/Category/CategoryPage";
 import CartPage from "./pages/CartPage";
 import ProductList from "./product-list/productlist";
 import Home from "./pages/Home";
+import CheckoutLayOut from "./components/layout/checkout/CheckoutLayOut";
 
 function App() {
   const queryClient = new QueryClient();
@@ -47,7 +48,7 @@ function App() {
           element: <CheckoutLayOut />,
           children: [
             {
-              index : true ,
+              index: true,
               element: <CheckoutPage1 />,
             },
             {
@@ -104,33 +105,7 @@ function App() {
 
   return (
     <div>
-      <QueryClientProvider client={queryClient}>
-        <RouterProvider router={routers} />
-        <Toaster
-          position="top-right"
-          toastOptions={{
-            duration: 3000,
-            style: {
-              background: "#363636",
-              color: "#fff",
-            },
-            success: {
-              duration: 3000,
-              iconTheme: {
-                primary: "#4ade80",
-                secondary: "#fff",
-              },
-            },
-            error: {
-              duration: 4000,
-              iconTheme: {
-                primary: "#ef4444",
-                secondary: "#fff",
-              },
-            },
-          }}
-        />
-      </QueryClientProvider>
+      <RouterProvider router={routers} />
     </div>
   );
 }
