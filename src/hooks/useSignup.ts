@@ -16,22 +16,15 @@ export const useSignup = () => {
       const response = await registerUser(credentials);
 
       if (response.success) {
-        // Save token
         setToken(response.data.token);
 
-        // Show success message
         toast.success(response.message || "Registration successful!");
 
-        // Log user data (optional)
-        console.log("User registered:", response.data.user);
-
-        // Navigate to home page
         navigate("/");
 
         return { success: true, data: response.data };
       }
     } catch (error: unknown) {
-      // Handle error
       const axiosError = error as AxiosError<{
         message?: string;
         errors?: Record<string, string[]>;
@@ -41,7 +34,6 @@ export const useSignup = () => {
         axiosError.response?.data?.message ||
         "Registration failed. Please try again.";
 
-      // Show field-specific errors if available
       const fieldErrors = axiosError.response?.data?.errors;
       if (fieldErrors) {
         Object.entries(fieldErrors).forEach(([field, messages]) => {

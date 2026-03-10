@@ -11,7 +11,6 @@ import MainLayout from "./components/layout/MainLayout";
 import CheckoutPage1 from "./pages/Checkout pages/CheckoutPage1";
 import CheckoutPage2 from "./pages/Checkout pages/CheckoutPage2";
 import CheckoutPage3 from "./pages/Checkout pages/CheckoutPage3";
-
 import Dashboard from "./pages/profile/Dashboard";
 import PersonalInfo from "./pages/profile/PersonalInfo";
 import OrderHistory from "./pages/profile/OrderHistory";
@@ -28,6 +27,13 @@ import Home from "./pages/Home";
 import ProductDetails from "./pages/ProductDetails";
 import CartPage from "./pages/CartPage";
 import ProductList from "./product-list/productlist";
+import Home from "./pages/Home";
+import LoginPage from "./pages/authorization/login/LoginPage";
+import SignUpPage from "./pages/authorization/signup/SignUpPage";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Toaster } from "react-hot-toast";
+import ProtectedRoute from "./components/common/ProtectedRoute";
+import PublicRoute from "./components/common/PublicRoute";
 
 function App() {
   const queryClient = new QueryClient();
@@ -53,20 +59,22 @@ function App() {
           element: <ProductList />,
         },
         {
-          path: "checkout-1",
-          element: <CheckoutPage1 />,
-        },
-        {
-          path: "checkout-2",
-          element: <CheckoutPage2 />,
-        },
-        {
-          path: "checkout-3",
-          element: <CheckoutPage3 />,
-        },
-        {
-          path: "product-details",
-          element: <ProductDetails />,
+          path: "checkout",
+          element: <CheckoutLayOut />,
+          children: [
+            {
+              index: true,
+              element: <CheckoutPage1 />,
+            },
+            {
+              path: "2",
+              element: <CheckoutPage2 />,
+            },
+            {
+              path: "3",
+              element: <CheckoutPage3 />,
+            },
+          ],
         },
         {
           path: "cart",
