@@ -1,4 +1,12 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Toaster } from "react-hot-toast";
+
+import ProtectedRoute from "./components/common/ProtectedRoute";
+import PublicRoute from "./components/common/PublicRoute";
+import LoginPage from "./pages/authorization/login/LoginPage";
+import SignUpPage from "./pages/authorization/signup/SignUpPage";
+
 import MainLayout from "./components/layout/MainLayout";
 import CheckoutPage1 from "./pages/Checkout pages/CheckoutPage1";
 import CheckoutPage2 from "./pages/Checkout pages/CheckoutPage2";
