@@ -1,4 +1,5 @@
-import { useEffect, type JSX, useState } from "react";
+import { type JSX } from "react";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { getCart } from "../lib/api/getcart.api";
 import { deleteCartItem } from "../lib/api/deleteCartItem.api";
 import { updateCartItem } from "../lib/api/updateCartItem.api";
@@ -8,63 +9,103 @@ import { OrderSummary } from "../components/cart/OrderSummary";
 import { MoreToExplore } from "../components/cart/MoreToExplore";
 
 export default function CartPage(): JSX.Element {
-  const [cartData, setCartData] = useState<CartItem[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const queryClient = useQueryClient();
 
-  async function getCartData() {
-    setIsLoading(true);
-    try {
+  // 1. Fetch Cart Data
+  const {
+    data: cartData = [],
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["cart"],
+    queryFn: async () => {
       const response = await getCart();
-      console.log(response);
-      setCartData(response.data.items);
-    } catch (error) {
-      console.error("Failed to fetch cart", error);
-    } finally {
-      setIsLoading(false);
-    }
-  }
+      // Ensure we return the items array
+      return response.data.items as CartItem[];
+    },
+    staleTime: 1000 * 60 * 5,
+  });
 
-  useEffect(() => {
-    getCartData();
-  }, []);
-
+  // Calculate total price
   const totalCartPrice = cartData.reduce(
     (total, item) => total + item.subtotal,
     0,
   );
 
-  const handleUpdateQuantity = async (mealId: number, newQuantity: number) => {
+  // 2. Update Cart Item Quantity Mutation
+  const updateQuantityMutation = useMutation({
+    mutationFn: ({ mealId, quantity }: { mealId: number; quantity: number }) =>
+      updateCartItem(mealId, quantity),
+    onMutate: async ({ mealId, quantity }) => {
+      // Cancel any outgoing refetches so they don't overwrite our optimistic update
+      await queryClient.cancelQueries({ queryKey: ["cart"] });
+
+      // Snapshot the previous value
+      const previousCart = queryClient.getQueryData<CartItem[]>(["cart"]);
+
+      // Optimistically update to the new value
+      if (previousCart) {
+        queryClient.setQueryData<CartItem[]>(["cart"], (old) =>
+          old?.map((item) => {
+            if (item.meal.id === mealId) {
+              const newSubtotal = item.unit_price * quantity;
+              return { ...item, quantity, subtotal: newSubtotal };
+            }
+            return item;
+          }),
+        );
+      }
+
+      // Return a context object with the snapshotted value
+      return { previousCart };
+    },
+    onError: (err, newTodo, context) => {
+      // If the mutation fails, use the context returned from onMutate to roll back
+      if (context?.previousCart) {
+        queryClient.setQueryData(["cart"], context.previousCart);
+      }
+      console.error("Failed to update cart item quantity", err);
+    },
+    onSettled: () => {
+      // Always refetch after error or success to ensure we have correct data
+      queryClient.invalidateQueries({ queryKey: ["cart"] });
+    },
+  });
+
+  // 3. Delete Cart Item Mutation
+  const deleteItemMutation = useMutation({
+    mutationFn: (mealId: number) => deleteCartItem(mealId),
+    onMutate: async (mealId) => {
+      await queryClient.cancelQueries({ queryKey: ["cart"] });
+
+      const previousCart = queryClient.getQueryData<CartItem[]>(["cart"]);
+
+      if (previousCart) {
+        queryClient.setQueryData<CartItem[]>(["cart"], (old) =>
+          old?.filter((item) => item.id !== mealId),
+        );
+      }
+
+      return { previousCart };
+    },
+    onError: (err, id, context) => {
+      if (context?.previousCart) {
+        queryClient.setQueryData(["cart"], context.previousCart);
+      }
+      console.error("Failed to delete cart item", err);
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ["cart"] });
+    },
+  });
+
+  const handleUpdateQuantity = (mealId: number, newQuantity: number) => {
     if (newQuantity < 1) return;
-
-    // Optimistic UI update
-    setCartData((prev) =>
-      prev.map((item) => {
-        if (item.meal.id === mealId) {
-          const newSubtotal = item.unit_price * newQuantity;
-          return { ...item, quantity: newQuantity, subtotal: newSubtotal };
-        }
-        return item;
-      }),
-    );
-
-    try {
-      await updateCartItem(mealId, newQuantity);
-    } catch (error) {
-      console.error("Failed to update cart item quantity", error);
-      // Revert on failure (reload from server)
-      getCartData();
-    }
+    updateQuantityMutation.mutate({ mealId, quantity: newQuantity });
   };
 
-  const handleDeleteItem = async (mealId: number) => {
-    setCartData((prev) => prev.filter((item) => item.id !== mealId));
-
-    try {
-      await deleteCartItem(mealId);
-    } catch (error) {
-      console.error("Failed to delete cart item", error);
-      getCartData();
-    }
+  const handleDeleteItem = (mealId: number) => {
+    deleteItemMutation.mutate(mealId);
   };
 
   return (
@@ -78,8 +119,10 @@ export default function CartPage(): JSX.Element {
             Products in Cart
           </h2>
           <div className="mt-[20px] flex flex-wrap">
-            {isLoading && cartData.length === 0 ? (
+            {isLoading ? (
               <p>Loading cart...</p>
+            ) : isError ? (
+              <p>Failed to load cart.</p>
             ) : cartData.length === 0 ? (
               <p>Your cart is empty.</p>
             ) : (
