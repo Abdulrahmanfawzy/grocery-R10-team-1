@@ -9,7 +9,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useOutletContext } from "react-router-dom";
 
 function CustomizeDelivery() {
-  const { setValue, formState, register } = useOutletContext();
+  const { setValue, formState, register , setaddres  } = useOutletContext();
 
   const [selectedAddresses, setselectedAddresses] = useState(0);
 
@@ -22,6 +22,7 @@ function CustomizeDelivery() {
   useEffect(() => {
     if (!isLoading && data.data?.[selectedAddresses]) {
       setValue("address_id", data.data[selectedAddresses].id);
+      setaddres ( data.data[selectedAddresses].full_name)
     }
   }, [selectedAddresses, data, isLoading, setValue]);
 

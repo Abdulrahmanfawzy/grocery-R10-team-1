@@ -35,7 +35,7 @@ const chat = (
 );
 
 function CheckoutPage3() {
-  const { order } = useOutletContext();
+  const { order , addres } = useOutletContext();
 
   return (
     <div className=" min-h-screen container  pt-2  w-[95%] md:w-[90%]  mx-auto mb-4 ">
@@ -82,11 +82,12 @@ function CheckoutPage3() {
               Delivery Adress
             </h2>
 
-            <input
-              type="text"
-              className="w-full border border-gray-300 p-2 rounded"
-              placeholder=" Villa 14, Street 23, District 5, New Cairo, Cairo 11835 "
-            />
+              
+              
+            
+            <div className="w-full border border-gray-300 p-2 rounded">
+              {addres}
+            </div>
           </div>
         </div>
       </div>

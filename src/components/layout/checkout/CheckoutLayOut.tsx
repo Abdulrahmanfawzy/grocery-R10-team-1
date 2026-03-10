@@ -54,8 +54,8 @@ function CheckoutLayOut() {
       },
     });
 
-    
-  const [order, setorder ] = useState();
+  const [addres, setaddres] = useState();
+  const [order, setorder] = useState();
   const [submitLoding, setsubmitLoding] = useState(false);
 
   const onSubmit: SubmitHandler<schemaType> = async (data) => {
@@ -63,7 +63,7 @@ function CheckoutLayOut() {
     const response = await checkout(data);
     console.log(response);
     if (response.success) {
-      setorder(response.data)
+      setorder(response.data);
       setsubmitLoding(false);
       navigat("/checkout/3");
     }
@@ -109,8 +109,10 @@ function CheckoutLayOut() {
               register,
               trigger,
               cartData,
-              submitLoding ,
-              order
+              submitLoding,
+              order,
+              addres,
+              setaddres,
             }}
           />
         </form>
