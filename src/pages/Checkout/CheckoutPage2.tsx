@@ -3,11 +3,12 @@ import PaymentSummery from "./checkoutComponents/PaymentSummery";
 import { useOutletContext } from "react-router-dom";
 import { useState } from "react";
 import "../../index.css";
-
-
+import { Button } from "@/components/ui/button";
+import { Spinner } from "@/components/ui/spinner";
 
 function CheckoutPage2() {
-  const { setValue, formState, register } = useOutletContext();
+  const { setValue, formState, register, cartData, submitLoding } =
+    useOutletContext();
   const [PaymentMethod, setPaymentMethod] = useState();
 
   function setPayment_method(method) {
@@ -96,7 +97,7 @@ function CheckoutPage2() {
             Order Summary
           </h2>
           <div className=" border border-gray-300 rounded-md py-1">
-            <CartSummary />
+            <CartSummary cartData={cartData} />
           </div>
         </div>
 
@@ -105,16 +106,21 @@ function CheckoutPage2() {
             Payment Summery
           </h2>
           <div className="  w-full p-6 bg-white border border-gray-300 rounded-md pt-3">
-            <PaymentSummery />
+            <PaymentSummery cartData={cartData} />
           </div>
         </div>
       </div>
-      <button
+      <Button
         type="submit"
-        className=" px-4 h-12 background-DarkBlue-color rounded-md text-white mb-4 mt-8 "
+        disabled={submitLoding}
+        className=" px-4 h-12 w-36 background-DarkBlue-color rounded-md text-white mb-4 mt-8 "
       >
-        Confirm Payment & Go To Checkout
-      </button>
+        {submitLoding ? (
+          <Spinner className=" size-5 text-white" />
+        ) : (
+          "Confirm Payment "
+        )}
+      </Button>
     </div>
   );
 }

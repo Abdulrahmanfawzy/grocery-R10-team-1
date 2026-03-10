@@ -1,9 +1,6 @@
 import { currencyFormat } from "@/lib/utils/currencyFormat";
-import { useOutletContext } from "react-router-dom";
-function PaymentSummery() {
 
-  const { cartData} = useOutletContext();
-
+function PaymentSummery({cartData}) {
   return (
     <div>
       <h2 className=" text-lg text-DarkBlue-color font-medium ">Total Amount</h2>

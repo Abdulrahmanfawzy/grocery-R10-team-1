@@ -7,7 +7,7 @@ import { useOutletContext } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 function CheckoutPage1() {
-  const { trigger, getValues, setValue, formState, register } =
+  const { trigger, getValues, setValue, formState, register , cartData } =
     useOutletContext();
 
   const navigate = useNavigate();
@@ -15,12 +15,11 @@ function CheckoutPage1() {
   async function ContinueCheckout() {
     const valid = await trigger([
       "address_id",
-      "deliveryOption",
-      "deliverySpeed",
+      "delivery_type",
+      "delivery_speed",
     ]);
 
     if (valid) {
-      console.log(valid);
       navigate("/checkout/2");
     }
   }
@@ -29,25 +28,21 @@ function CheckoutPage1() {
     <div className=" min-h-screen container  pt-2  w-[95%] md:w-[90%]  mx-auto ">
       <div className=" grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-16">
         <div className=" flex flex-col gap-5">
-          <CustomizeDelivery
-            register={register}
-            setValue={setValue}
-            formState={formState}
-          />
+          <CustomizeDelivery/>
           <div className=" mt-3">
             <h2 className=" text-gray-800 font-sans text-lg mb-1">
               Special Notes
             </h2>
             <Input
-              {...register("specialNotes")}
-              aria-invalid={!!formState.errors.specialNotes}
+              {...register("notes")}
+              aria-invalid={!!formState.errors.notes}
               type="text"
               className="w-full border border-gray-300 p-2 rounded"
               placeholder="input text ......... "
             />
-            {formState.errors.specialNotes?.message && (
+            {formState.errors.notes?.message && (
               <p role="alert" className="text-red-500 text-xs mt-1">
-                {formState.errors.specialNotes?.message}
+                {formState.errors.notes?.message}
               </p>
             )}
           </div>
@@ -57,9 +52,9 @@ function CheckoutPage1() {
             Cart Summary
           </h2>
           <div className=" border border-gray-300 rounded-md pt-1">
-            <CartSummary />
+            <CartSummary cartData={cartData} />
             <div className=" px-5 py-3 border-t border-gray-400 ">
-              <PaymentSummery />
+              <PaymentSummery cartData={cartData} />
             </div>
           </div>
         </div>

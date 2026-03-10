@@ -2,6 +2,7 @@ import CartSummary from "./checkoutComponents/CartSummary";
 import PaymentSummery from "./checkoutComponents/PaymentSummery";
 import "../../index.css";
 import Rating from "@/components/common/Rating";
+import { useOutletContext } from "react-router-dom";
 
 const phone = (
   <svg
@@ -34,6 +35,8 @@ const chat = (
 );
 
 function CheckoutPage3() {
+  const { order } = useOutletContext();
+
   return (
     <div className=" min-h-screen container  pt-2  w-[95%] md:w-[90%]  mx-auto mb-4 ">
       <h2 className=" text-xl font-medium  text-gray-700 mb-2">Driver info</h2>
@@ -65,9 +68,9 @@ function CheckoutPage3() {
 
       <div className=" grid grid-cols-1 md:grid-cols-2 gap-7">
         <div className=" border border-gray-300 rounded-md pt-1">
-          <CartSummary />
+          <CartSummary cartData={order} />
           <div className=" px-5 py-3 border-t border-gray-400 ">
-            <PaymentSummery />
+            <PaymentSummery cartData={order} />
           </div>
         </div>
         <div>

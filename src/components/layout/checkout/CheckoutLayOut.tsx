@@ -10,41 +10,27 @@ import { useQuery } from "@tanstack/react-query";
 import { Spinner } from "@/components/ui/spinner";
 import "../../../index.css";
 import { useNavigate } from "react-router-dom";
-
-const base_url = "https://grocery.newcinderella.online";
-const token = "302|yKvAC8mnzKFnykaa8QmiUV9k9k7A0ljsJnW5sfFT74b2ba5e";
-
-async function getCard() {
-  try {
-    const response = await fetch(`${base_url}/api/cart`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    });
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error(error);
-  }
-}
+import { getCard } from "@/lib/api/checkout";
+import { checkout } from "@/lib/api/checkout";
+import { useState } from "react";
 
 type schemaType = z.infer<typeof schema>;
 
 const schema = z.object({
-  deliveryOption: z.enum(["pickup", "delivery"], {
-    message: "Please select delivery option",
+  delivery_type: z.enum(["pickup", "delivery"], {
+    message: "Please select delivery type",
   }),
-  deliverySpeed: z.enum(["Priority", "Standard"], {
+  delivery_speed: z.enum(["Priority", "Standard"], {
     message: "Please select delivery speed",
   }),
-  specialNotes: z.string().optional(),
-  address_id: z.number("address is requerd "),
-
+  notes: z.string().optional(),
+  address_id: z.number({
+    message: "address is required",
+  }),
   payment_method: z.enum(["cash_on_delivery", "card"], {
     message: "Please select your  payment method",
   }),
+  amount: z.number().optional(),
 });
 
 function CheckoutLayOut() {
@@ -61,16 +47,27 @@ function CheckoutLayOut() {
     useForm<schemaType>({
       resolver: zodResolver(schema),
       defaultValues: {
-        deliveryOption: undefined,
-        deliverySpeed: undefined,
-        specialNotes: "",
+        delivery_type: undefined,
+        delivery_speed: undefined,
+        notes: "",
         address_id: undefined,
       },
     });
 
-  const onSubmit: SubmitHandler<schemaType> = (data) => {
-    console.log("Form Data:", data);
-    navigat("/checkout/3");
+    
+  const [order, setorder ] = useState();
+  const [submitLoding, setsubmitLoding] = useState(false);
+
+  const onSubmit: SubmitHandler<schemaType> = async (data) => {
+    setsubmitLoding(true);
+    const response = await checkout(data);
+    console.log(response);
+    if (response.success) {
+      setorder(response.data)
+      setsubmitLoding(false);
+      navigat("/checkout/3");
+    }
+    setsubmitLoding(false);
   };
 
   const { pathname } = useLocation();
@@ -78,6 +75,12 @@ function CheckoutLayOut() {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [pathname]);
+
+  useEffect(() => {
+    if (cartData?.total) {
+      setValue("amount", cartData.total);
+    }
+  }, [data, setValue]);
 
   if (isError) {
     return (
@@ -106,6 +109,8 @@ function CheckoutLayOut() {
               register,
               trigger,
               cartData,
+              submitLoding ,
+              order
             }}
           />
         </form>

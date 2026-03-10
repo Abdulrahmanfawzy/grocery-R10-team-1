@@ -4,56 +4,26 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Skeleton } from "@/components/ui/skeleton";
 import "../../../index.css";
+import { getAddresses } from "@/lib/api/checkout";
+import { useQuery } from "@tanstack/react-query";
+import { useOutletContext } from "react-router-dom";
 
-const base_url = "https://grocery.newcinderella.online";
-const token = "302|yKvAC8mnzKFnykaa8QmiUV9k9k7A0ljsJnW5sfFT74b2ba5e";
-
-async function getAddresses() {
-  try {
-    const response = await fetch(`${base_url}/api/addresses`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    });
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("Failed to fetch addresses:", error);
-  }
-}
-
-type Props = {
-  register: any;
-  formState: any;
-};
-
-function CustomizeDelivery({ register, formState, setValue }: Props) {
-  const [addresses, setAddresses] = useState<any[]>([]);
-  const [loding, setloding] = useState(true);
+function CustomizeDelivery() {
+  const { setValue, formState, register } = useOutletContext();
 
   const [selectedAddresses, setselectedAddresses] = useState(0);
 
-  useEffect(() => {
-    async function fetchAddresses() {
-      const data = await getAddresses();
-      if (data.success) {
-        setAddresses(data.data);
-      } else {
-        setAddresses(null);
-      }
-      setloding(false);
-    }
+  const { data , isLoading } = useQuery({
+    queryKey: ["getUserAddresses"],
+    queryFn: getAddresses,
+  });
 
-    fetchAddresses();
-  }, []);
 
   useEffect(() => {
-    if (addresses[selectedAddresses]) {
-      setValue("address_id", addresses[selectedAddresses].id);
+    if (!isLoading && data.data?.[selectedAddresses]) {
+      setValue("address_id", data.data[selectedAddresses].id);
     }
-  }, [selectedAddresses, addresses]);
+  }, [selectedAddresses, data, isLoading, setValue]);
 
   function decrease() {
     if (selectedAddresses > 0) {
@@ -62,7 +32,7 @@ function CustomizeDelivery({ register, formState, setValue }: Props) {
   }
 
   function increase() {
-    if (selectedAddresses < addresses.length - 1) {
+    if ( selectedAddresses < data.data.length - 1) {
       setselectedAddresses(selectedAddresses + 1);
     }
   }
@@ -81,9 +51,9 @@ function CustomizeDelivery({ register, formState, setValue }: Props) {
             <div className="flex items-center gap-5 ">
               <label className="flex items-center gap-2 cursor-pointer">
                 <Input
-                  {...register("deliveryOption")}
+                  {...register("delivery_type")}
                   type="radio"
-                  name="deliveryOption"
+                  name="delivery_type"
                   value="pickup"
                   className="w-5 h-5 "
                   style={{ accentColor: "#014162" }}
@@ -93,9 +63,9 @@ function CustomizeDelivery({ register, formState, setValue }: Props) {
 
               <label className="flex items-center gap-2 cursor-pointer">
                 <Input
-                  {...register("deliveryOption")}
+                  {...register("delivery_type")}
                   type="radio"
-                  name="deliveryOption"
+                  name="delivery_type"
                   value="delivery"
                   className="w-5 h-5 "
                   style={{ accentColor: "#014162" }}
@@ -103,19 +73,19 @@ function CustomizeDelivery({ register, formState, setValue }: Props) {
                 <MotorbikeIcon size={20} /> Delivery
               </label>
             </div>
-            {formState.errors.deliveryOption?.message && (
+            {formState.errors.delivery_type?.message && (
               <p
                 id="specialNotes-error"
                 role="alert"
                 className="text-red-500 text-xs mt-1"
               >
-                {formState.errors.deliveryOption?.message}
+                {formState.errors.delivery_type?.message}
               </p>
             )}
           </div>
         </div>
 
-        {loding ? (
+        {isLoading ? (
           <div>
             <div className="mt-3">
               <div>
@@ -147,14 +117,14 @@ function CustomizeDelivery({ register, formState, setValue }: Props) {
               </div>
             </div>
           </div>
-        ) : addresses.length > 1 ? (
+        ) : data.data?.length > 0 ? (
           <div className="mt-3">
             <div>
               <h2 className=" text-sm font-medium text-gray-700 mb-1 ">
                 Address
               </h2>
               <div className="w-full border border-gray-300 p-2 rounded">
-                {addresses[selectedAddresses]?.full_name || "not found"}
+                {data.data[selectedAddresses]?.full_name || "not found"}
               </div>
             </div>
 
@@ -164,7 +134,7 @@ function CustomizeDelivery({ register, formState, setValue }: Props) {
                   City
                 </h2>
                 <div className="w-full border border-gray-300 p-2 rounded">
-                  {addresses[selectedAddresses]?.city || "not found"}
+                  {data.data[selectedAddresses]?.city || "not found"}
                 </div>
               </div>
               <div>
@@ -172,7 +142,7 @@ function CustomizeDelivery({ register, formState, setValue }: Props) {
                   street address
                 </h2>
                 <div className="w-full border border-gray-300 p-2 rounded">
-                  {addresses[selectedAddresses]?.street_address || "not found"}
+                  {data.data[selectedAddresses]?.street_address || "not found"}
                 </div>
               </div>
             </div>
@@ -250,9 +220,9 @@ function CustomizeDelivery({ register, formState, setValue }: Props) {
           <div className="flex items-center gap-5 ">
             <label className="flex items-center gap-2 cursor-pointer">
               <Input
-                {...register("deliverySpeed")}
+                {...register("delivery_speed")}
                 type="radio"
-                name="deliverySpeed"
+                name="delivery_speed"
                 value="Standard"
                 className="w-5 h-5 "
                 style={{ accentColor: "#014162" }}
@@ -261,9 +231,9 @@ function CustomizeDelivery({ register, formState, setValue }: Props) {
             </label>
             <label className="flex items-center gap-2 cursor-pointer">
               <Input
-                {...register("deliverySpeed")}
+                {...register("delivery_speed")}
                 type="radio"
-                name="deliverySpeed"
+                name="delivery_speed"
                 value="Priority"
                 className="w-5 h-5 "
                 style={{ accentColor: "#014162" }}
@@ -272,13 +242,13 @@ function CustomizeDelivery({ register, formState, setValue }: Props) {
               Priority
             </label>
           </div>
-          {formState.errors.deliverySpeed?.message && (
+          {formState.errors.delivery_speed?.message && (
             <p
               id="specialNotes-error"
               role="alert"
               className="text-red-500 text-xs mt-1"
             >
-              {formState.errors.deliverySpeed?.message}
+              {formState.errors.delivery_speed?.message}
             </p>
           )}
         </div>
