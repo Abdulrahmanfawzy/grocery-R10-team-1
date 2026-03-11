@@ -4,7 +4,8 @@ import type { Product } from "@/types/home/product";
 import { ShoppingCart } from "lucide-react";
 
 const HomeProductCard = ({ product }: { product: Product }) => {
-  const { name, category, rating, owner, image, price, discount } = product;
+  const { name, category, rating, owner, image, price, discount }: Product =
+    product;
   const finalPrice = calcFinalPrice(price, discount);
   return (
     <div className="flex flex-col gap-2 rounded-[10px] border border-gray-100 bg-white p-4 ">
