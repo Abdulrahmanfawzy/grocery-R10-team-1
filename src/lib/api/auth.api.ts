@@ -1,6 +1,5 @@
 import axiosInstance from "../Axios/axiosInstance";
 
-// Types for API requests and responses
 export interface LoginCredentials {
   login: string;
   password: string;
@@ -12,7 +11,7 @@ export interface SignupCredentials {
   phone: string;
   password: string;
   password_confirmation: string;
-  agree_terms: number; // 1 or 0
+  agree_terms: number;
 }
 
 export interface LoginResponse {
@@ -60,7 +59,6 @@ export const loginUser = async (
   return response.data;
 };
 
-// Register/Signup API
 export const registerUser = async (
   credentials: SignupCredentials,
 ): Promise<SignupResponse> => {

@@ -9,6 +9,7 @@ import {
 import type { MeatCategory } from "@/components/Types/Category";
 import type { Product } from "@/types/home/product";
 import CategoryCard from "../common/MainCard";
+<<<<<<< HEAD
 
 type CategorySliderItem = MeatCategory | Product;
 
@@ -21,9 +22,42 @@ export default function CategorySlider({
   categoryName,
   Items,
 }: CategorySliderProps) {
+=======
+import { useCategoryMeals } from "@/hooks/useCategoryMeals";
+import { Skeleton } from "@/components/ui/skeleton";
+
+export default function CategorySlider({ categoryId }: { categoryId: number }) {
+  const { category, meals, isLoading, error } = useCategoryMeals(categoryId);
+
+  if (isLoading) {
+    return (
+      <div className="max-w-6xl mx-auto my-10">
+        <Skeleton className="h-8 w-48 mb-4" />
+        <div className="flex gap-4">
+          {[...Array(3)].map((i) => (
+            <Skeleton key={i} className="h-96 w-full" />
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="max-w-6xl mx-auto my-10">
+        <p className="text-red-500">{error}</p>
+      </div>
+    );
+  }
+
+  if (!meals.length) {
+    return null;
+  }
+
+>>>>>>> aed336ec4dfefb25b2d5a40af8e63da8dbc8f886
   return (
     <div className="max-w-6xl mx-auto my-10">
-      <h2 className="text-lg font-semibold mb-4">{categoryName}</h2>
+      <h2 className="text-lg font-semibold mb-4">{category?.name}</h2>
       <Carousel
         opts={{
           align: "start",
@@ -31,11 +65,11 @@ export default function CategorySlider({
         className="w-full mx-auto"
       >
         <CarouselContent>
-          {Items.map((item, index) => (
-            <CarouselItem key={index} className=" lg:basis-1/3">
+          {meals.map((meal) => (
+            <CarouselItem key={meal.id} className=" lg:basis-1/3">
               <div className="p-1">
                 <Card>
-                  <CategoryCard meat={item} />
+                  <CategoryCard meal={meal} />
                 </Card>
               </div>
             </CarouselItem>
