@@ -1,55 +1,58 @@
-import type { MeatCategory } from "@/components/Types/Category";
-import { calcDiscountedPrice, roundRating } from "@/lib/utils/helperFn";
+import type { Meal } from "@/components/Types/Category";
+import { roundRating } from "@/lib/utils/helperFn";
 import { Plus, ShoppingCart, Trash2 } from "lucide-react";
 import Rating from "./Rating";
 
-export default function CategoryCard({ meat }: { meat: MeatCategory }) {
-  console.log(meat);
+export default function CategoryCard({ meal }: { meal: Meal }) {
+  const discountPercentage = meal.has_offer
+    ? Math.round(((meal.price - meal.discount_price) / meal.price) * 100)
+    : 0;
+
   return (
     <div className="px-4 pt-15 pb-5   relative">
       <div className="absolute top-2 left-2 text-sm px-2 py-1 text-white flex gap-2">
-        {meat.isNew ? (
+        {meal.is_featured ? (
           <div className="bg-primary px-2 py-3 rounded-br-2xl rounded-tl-2xl">
-            New
+            Featured
           </div>
         ) : null}
-        {meat.inStock ? (
+        {meal.in_stock ? (
           <div className="bg-primary px-2 py-3 rounded-br-2xl rounded-tl-2xl">
             in stock
           </div>
         ) : null}
-        {meat.hasDiscount ? (
+        {meal.has_offer ? (
           <div className="bg-primary px-2 py-3 rounded-br-2xl rounded-tl-2xl">
-            {meat.discount}% off
+            {discountPercentage}% off
           </div>
         ) : null}
       </div>
       <div className="flex justify-center">
         <img
-          src={meat.image}
-          alt={meat.name}
+          src={meal.image_url}
+          alt={meal.title}
           className=" h-48 object-contain"
         />
       </div>
       <div className="flex justify-between mt-4">
-        <h3 className=" font-medium text-xl ">{meat.name}</h3>
-        {meat.hasDiscount ? (
+        <h3 className=" font-medium text-xl ">{meal.title}</h3>
+        {meal.has_offer ? (
           <div className="flex gap-2">
             <span className="font-medium text-xl">
-              ${calcDiscountedPrice(meat.price, meat.discount)}
+              ${meal.final_price.toFixed(2)}
             </span>
             <span className="line-through text-gray-500 text-sm">
-              $ {meat.price}
+              $ {meal.price.toFixed(2)}
             </span>
           </div>
         ) : (
-          <span className="font-medium text-xl">${meat.price}</span>
+          <span className="font-medium text-xl">${meal.price.toFixed(2)}</span>
         )}
       </div>
 
       <div className="flex items-center gap-2 mt-2">
-        <span className="">{<Rating rating={roundRating(meat.rate)} />}</span>
-        <span className="text-gray-500 text-sm">({meat.rate})/5 </span>
+        <span className="">{<Rating rating={roundRating(meal.rating)} />}</span>
+        <span className="text-gray-500 text-sm">({meal.rating})/5 </span>
       </div>
       <div className="mt-4 flex justify-between items-center gap-3">
         <button className="w-full bg-primary text-white py-2 rounded-lg flex items-center justify-center gap-2">

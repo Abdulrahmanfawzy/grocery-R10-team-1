@@ -1,8 +1,12 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Toaster } from "react-hot-toast";
+
+import ProtectedRoute from "./components/common/ProtectedRoute";
+import PublicRoute from "./components/common/PublicRoute";
+import LoginPage from "./pages/authorization/login/LoginPage";
+import SignUpPage from "./pages/authorization/signup/SignUpPage";
 import MainLayout from "./components/layout/MainLayout";
-import CheckoutPage1 from "./pages/Checkout pages/CheckoutPage1";
-import CheckoutPage2 from "./pages/Checkout pages/CheckoutPage2";
-import CheckoutPage3 from "./pages/Checkout pages/CheckoutPage3";
 import Dashboard from "./pages/profile/Dashboard";
 import PersonalInfo from "./pages/profile/PersonalInfo";
 import OrderHistory from "./pages/profile/OrderHistory";
@@ -15,20 +19,25 @@ import Security from "./pages/profile/Security";
 import Support from "./pages/profile/Support";
 import Settings from "./pages/profile/Settings";
 import CategoryPage from "./pages/Category/CategoryPage";
+import Home from "./pages/Home";
+import ProductDetails from "./pages/ProductDetails";
 import CartPage from "./pages/CartPage";
 import ProductList from "./product-list/productlist";
-import Home from "./pages/Home";
-import LoginPage from "./pages/authorization/login/LoginPage";
-import SignUpPage from "./pages/authorization/signup/SignUpPage";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Toaster } from "./components/ui/sonner";
+import CheckoutLayOut from "./components/layout/checkout/CheckoutLayOut";
+import CheckoutPage1 from "./pages/Checkout/CheckoutPage1";
+import CheckoutPage2 from "./pages/Checkout/CheckoutPage2";
+import CheckoutPage3 from "./pages/Checkout/CheckoutPage3";
 
 function App() {
   const queryClient = new QueryClient();
   const routers = createBrowserRouter([
     {
       path: "/",
-      element: <MainLayout />,
+      element: (
+        <ProtectedRoute>
+          <MainLayout />
+        </ProtectedRoute>
+      ),
       children: [
         {
           index: true,
@@ -43,16 +52,22 @@ function App() {
           element: <ProductList />,
         },
         {
-          path: "checkout-1",
-          element: <CheckoutPage1 />,
-        },
-        {
-          path: "checkout-2",
-          element: <CheckoutPage2 />,
-        },
-        {
-          path: "checkout-3",
-          element: <CheckoutPage3 />,
+          path: "checkout",
+          element: <CheckoutLayOut />,
+          children: [
+            {
+              index: true,
+              element: <CheckoutPage1 />,
+            },
+            {
+              path: "2",
+              element: <CheckoutPage2 />,
+            },
+            {
+              path: "3",
+              element: <CheckoutPage3 />,
+            },
+          ],
         },
         {
           path: "cart",
@@ -62,8 +77,13 @@ function App() {
         {
           path: "profile",
           element: <ProfileLayout />,
-          children: [
-            { path: "dashboard", element: <Dashboard />, index: true },
+          children: [       
+            { index: true, element: <Dashboard /> },
+            { path: "dashboard", element: <Dashboard /> },
+            { path: "personal-info", element: <PersonalInfo /> },
+            { path: "order-history", element: <OrderHistory /> },
+            { path: "wallet", element: <Wallet /> },
+            { path: "dashboard", element: <Dashboard /> },
             { path: "info", element: <PersonalInfo /> },
             { path: "orders-history", element: <OrderHistory /> },
             { path: "payments-wallet", element: <Wallet /> },
@@ -79,11 +99,19 @@ function App() {
     },
     {
       path: "signin",
-      element: <LoginPage />,
+      element: (
+        <PublicRoute>
+          <LoginPage />
+        </PublicRoute>
+      ),
     },
     {
       path: "signup",
-      element: <SignUpPage />,
+      element: (
+        <PublicRoute>
+          <SignUpPage />
+        </PublicRoute>
+      ),
     },
   ]);
 
@@ -104,6 +132,30 @@ function App() {
           }}
         />
         <RouterProvider router={routers} />
+        <Toaster
+          position="top-right"
+          toastOptions={{
+            duration: 3000,
+            style: {
+              background: "#363636",
+              color: "#fff",
+            },
+            success: {
+              duration: 3000,
+              iconTheme: {
+                primary: "#4ade80",
+                secondary: "#fff",
+              },
+            },
+            error: {
+              duration: 4000,
+              iconTheme: {
+                primary: "#ef4444",
+                secondary: "#fff",
+              },
+            },
+          }}
+        />
       </QueryClientProvider>
     </div>
   );

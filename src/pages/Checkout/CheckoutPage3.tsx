@@ -1,8 +1,8 @@
-import ShippingNavBar from "./checkoutComponents/ShippingNavBar";
 import CartSummary from "./checkoutComponents/CartSummary";
-import PaymentCummery from "./checkoutComponents/PaymentCummery";
-import i from "./image/file_00000000e21c722fab7ac08f0882d09d.png";
+import PaymentSummery from "./checkoutComponents/PaymentSummery";
 import "../../index.css";
+import Rating from "@/components/common/Rating";
+import { useOutletContext } from "react-router-dom";
 
 const phone = (
   <svg
@@ -34,44 +34,19 @@ const chat = (
   </svg>
 );
 
-const star = (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 24 24"
-    fill="currentColor"
-    className="size-5 text-yellow-500"
-  >
-    <path
-      fillRule="evenodd"
-      d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
-      clipRule="evenodd"
-    />
-  </svg>
-);
-
 function CheckoutPage3() {
+  const { order , addres } = useOutletContext();
+
   return (
     <div className=" min-h-screen container  pt-2  w-[95%] md:w-[90%]  mx-auto mb-4 ">
-      <h1 className=" text-sm text-gray-500">
-        Home/Fresh Products/Cart/Checkout
-        <span className=" Color/main ml-1 font-medium text-DarkBlue-color ">
-          (shipping)
-        </span>
-      </h1>
-      <ShippingNavBar />
       <h2 className=" text-xl font-medium  text-gray-700 mb-2">Driver info</h2>
       <div className="  w-full pl-6 bg-white border border-gray-300 rounded-md p-6 mb-7">
         <div className=" flex justify-between ">
           <div className=" flex gap-3">
-            <img className=" rounded-sm w-14 h-14" src={i} alt="" />
+            <img className=" rounded-sm w-14 h-14" src="" alt="" />
             <div className=" flex flex-col gap-2">
               <h2>moaaz hassan </h2>
-              <div className=" flex gap-1">
-                {star}
-                {star}
-                {star}
-                {star}
-              </div>
+              <Rating rating={3} />
               <h2 className=" text-DarkBlue-color ">
                 phton number{" "}
                 <span className=" border rounded-sm p-1 text-gray-700 border-gray-400">
@@ -92,9 +67,11 @@ function CheckoutPage3() {
       </div>
 
       <div className=" grid grid-cols-1 md:grid-cols-2 gap-7">
-        <div>
-          <CartSummary />
-          <PaymentCummery />
+        <div className=" border border-gray-300 rounded-md pt-1">
+          <CartSummary cartData={order} />
+          <div className=" px-5 py-3 border-t border-gray-400 ">
+            <PaymentSummery cartData={order} />
+          </div>
         </div>
         <div>
           <h2 className=" text-xl font-medium  text-gray-700 mb-2">
@@ -105,11 +82,12 @@ function CheckoutPage3() {
               Delivery Adress
             </h2>
 
-            <input
-              type="text"
-              className="w-full border border-gray-300 p-2 rounded"
-              placeholder=" Villa 14, Street 23, District 5, New Cairo, Cairo 11835 "
-            />
+              
+              
+            
+            <div className="w-full border border-gray-300 p-2 rounded">
+              {addres}
+            </div>
           </div>
         </div>
       </div>
