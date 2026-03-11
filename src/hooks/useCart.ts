@@ -1,11 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addToCart,
-  removeFromCart,
-  updateCart,
-  clearCart,
-} from "../store/slices/cartSlice";
-import { addCart } from "../lib/api/addCart.api";
+import { addToCart } from "../store/slices/cartSlice";
+import { addCart } from "../lib/api/Cart/addCart.api";
 
 export const useCart = () => {
   const dispatch = useDispatch();
@@ -19,5 +14,6 @@ export const useCart = () => {
       console.error(error);
     }
   };
-  return { cart, addToCartHandler, removeFromCart, updateCart, clearCart };
+
+  return { addToCartHandler };
 };

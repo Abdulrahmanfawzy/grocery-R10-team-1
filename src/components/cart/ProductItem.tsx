@@ -11,20 +11,21 @@ export function ProductItem({
   onUpdateQuantity: (id: number, qty: number) => void;
   onDelete: (id: number) => void;
 }) {
+  console.log(item);
   return (
     <div className="w-full md:h-[130px] border-b border-[#BCB8B1] md:border-none pb-4 md:pb-0 relative">
-      <div className="flex items-start">
+      <div className="flex items-start relative">
         {/* Image */}
         <div className="mr-[8px] flex-shrink-0 relative">
           {item.meal.in_stock && (
-            <div className=" arounded-tl-[15px] rounded-br-[15px] bg-[#0E1112] text-white text-[12px] px-[8px] py-[4px] text-center mt-[8px]">
-              In Stock
+            <div className=" absolute top-1 left-1 rounded-tl-[15px] rounded-br-[15px] bg-[#0E1112] text-white text-[12px] px-[8px] py-[4px] text-center ">
+              {item.meal.in_stock ? "In Stock" : "Out of Stock"}
             </div>
           )}
           <img
             src={item.meal.image_url}
             alt={item.meal.title}
-            className="w-[100px] h-[100px] md:w-[80px] md:h-[80px] rounded-[8px] object-cover"
+            className="w-[100px] h-[100px] md:w-[120px] md:h-[120px] rounded-[8px] object-cover"
           />
         </div>
 
@@ -59,12 +60,8 @@ export function ProductItem({
           <div className="flex items-center mt-[10px]">
             <QuantitySelector
               quantity={item.quantity}
-              onIncrease={() =>
-                onUpdateQuantity(item.meal.id, item.quantity + 1)
-              }
-              onDecrease={() =>
-                onUpdateQuantity(item.meal.id, item.quantity - 1)
-              }
+              onIncrease={() => onUpdateQuantity(item.id, item.quantity + 1)}
+              onDecrease={() => onUpdateQuantity(item.id, item.quantity - 1)}
             />
             <div className="font-medium text-[15px] ml-5 hidden md:block">
               £{item.subtotal.toFixed(2)}

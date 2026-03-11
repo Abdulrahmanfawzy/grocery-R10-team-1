@@ -1,6 +1,13 @@
 import PromoIcon from "@/assets/PromoIcon.svg";
+import { Link } from "react-router-dom";
 
-export function OrderSummary({ subtotal }: { subtotal: number }) {
+export function OrderSummary({
+  subtotal,
+  total,
+}: {
+  subtotal: number;
+  total: number;
+}) {
   return (
     <div className="flex justify-between mt-[32px]">
       <div className="w-1/3 ">
@@ -9,7 +16,7 @@ export function OrderSummary({ subtotal }: { subtotal: number }) {
           <div className="p-[16px]">
             <div className="flex justify-between">
               <p className="tex-[#6B6F75]">Subtotal</p>
-              <p className="tex-[#6B6F75]">£{subtotal.toFixed(2)}</p>
+              <p className="tex-[#6B6F75]">£{subtotal}</p>
             </div>
             <div className="flex justify-between">
               <p className="tex-[#6B6F75]">Shipping</p>
@@ -17,11 +24,14 @@ export function OrderSummary({ subtotal }: { subtotal: number }) {
             </div>
             <div className="flex justify-between border-t-1 border-[#BCB8B1] mt-[10px] pt-[10px]">
               <p>Total</p>
-              <p>£{subtotal.toFixed(2)}</p>
+              <p>£{total}</p>
             </div>
-            <button className="bg-[#014162] mt-[10px] text-white text-[12px] p-[8px] w-[150px] rounded-[10px]">
-              Go To Checkout{" "}
-            </button>
+            <Link
+              to="/checkout-1"
+              className="bg-[#014162] mt-[10px] text-white text-[12px] p-[8px] w-[150px] rounded-[10px]"
+            >
+              Go To Checkout
+            </Link>
           </div>
         </div>
       </div>

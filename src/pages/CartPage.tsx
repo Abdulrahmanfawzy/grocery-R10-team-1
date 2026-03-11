@@ -1,111 +1,40 @@
 import { type JSX } from "react";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { getCart } from "../lib/api/getcart.api";
-import { deleteCartItem } from "../lib/api/deleteCartItem.api";
-import { updateCartItem } from "../lib/api/updateCartItem.api";
-import type { CartItem } from "../types/cart";
+import { getCart } from "../lib/api/Cart/getcart.api";
+import { deleteCartItem } from "../lib/api/Cart/deleteCartItem.api";
+import { updateCartItem } from "../lib/api/Cart/updateCartItem.api";
 import { ProductSelector } from "../components/cart/ProductSelector";
 import { OrderSummary } from "../components/cart/OrderSummary";
 import { MoreToExplore } from "../components/cart/MoreToExplore";
+import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
 
 export default function CartPage(): JSX.Element {
-  const queryClient = useQueryClient();
-
-  // 1. Fetch Cart Data
-  const {
-    data: cartData = [],
-    isLoading,
-    isError,
-  } = useQuery({
+  const { data, isLoading, error } = useQuery({
     queryKey: ["cart"],
-    queryFn: async () => {
-      const response = await getCart();
-      // Ensure we return the items array
-      return response.data.items as CartItem[];
-    },
-    staleTime: 1000 * 60 * 5,
+    queryFn: getCart,
+    staleTime: 10000,
   });
+  const cartData = data?.data?.items || [];
+  const subtotal = data?.data?.subtotal;
+  const total = data?.data?.total;
 
-  // Calculate total price
-  const totalCartPrice = cartData.reduce(
-    (total, item) => total + item.subtotal,
-    0,
-  );
-
-  // 2. Update Cart Item Quantity Mutation
-  const updateQuantityMutation = useMutation({
-    mutationFn: ({ mealId, quantity }: { mealId: number; quantity: number }) =>
-      updateCartItem(mealId, quantity),
-    onMutate: async ({ mealId, quantity }) => {
-      // Cancel any outgoing refetches so they don't overwrite our optimistic update
-      await queryClient.cancelQueries({ queryKey: ["cart"] });
-
-      // Snapshot the previous value
-      const previousCart = queryClient.getQueryData<CartItem[]>(["cart"]);
-
-      // Optimistically update to the new value
-      if (previousCart) {
-        queryClient.setQueryData<CartItem[]>(["cart"], (old) =>
-          old?.map((item) => {
-            if (item.meal.id === mealId) {
-              const newSubtotal = item.unit_price * quantity;
-              return { ...item, quantity, subtotal: newSubtotal };
-            }
-            return item;
-          }),
-        );
-      }
-
-      // Return a context object with the snapshotted value
-      return { previousCart };
-    },
-    onError: (err, newTodo, context) => {
-      // If the mutation fails, use the context returned from onMutate to roll back
-      if (context?.previousCart) {
-        queryClient.setQueryData(["cart"], context.previousCart);
-      }
-      console.error("Failed to update cart item quantity", err);
-    },
-    onSettled: () => {
-      // Always refetch after error or success to ensure we have correct data
-      queryClient.invalidateQueries({ queryKey: ["cart"] });
-    },
-  });
-
-  // 3. Delete Cart Item Mutation
-  const deleteItemMutation = useMutation({
-    mutationFn: (mealId: number) => deleteCartItem(mealId),
-    onMutate: async (mealId) => {
-      await queryClient.cancelQueries({ queryKey: ["cart"] });
-
-      const previousCart = queryClient.getQueryData<CartItem[]>(["cart"]);
-
-      if (previousCart) {
-        queryClient.setQueryData<CartItem[]>(["cart"], (old) =>
-          old?.filter((item) => item.id !== mealId),
-        );
-      }
-
-      return { previousCart };
-    },
-    onError: (err, id, context) => {
-      if (context?.previousCart) {
-        queryClient.setQueryData(["cart"], context.previousCart);
-      }
-      console.error("Failed to delete cart item", err);
-    },
-    onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: ["cart"] });
-    },
-  });
-
-  const handleUpdateQuantity = (mealId: number, newQuantity: number) => {
+  const handleUpdateQuantity = async (mealId: number, newQuantity: number) => {
     if (newQuantity < 1) return;
-    updateQuantityMutation.mutate({ mealId, quantity: newQuantity });
+
+    try {
+      console.log("Cart item quantity updated successfully");
+      await updateCartItem(mealId, newQuantity);
+    } catch (error) {
+      console.error("Failed to update cart item quantity", error);
+    }
   };
 
-  const handleDeleteItem = (mealId: number) => {
-    deleteItemMutation.mutate(mealId);
+  const handleDeleteItem = async (mealId: number) => {
+    try {
+      await deleteCartItem(mealId);
+    } catch (error) {
+      console.error("Failed to delete cart item", error);
+    }
   };
 
   return (
@@ -119,10 +48,8 @@ export default function CartPage(): JSX.Element {
             Products in Cart
           </h2>
           <div className="mt-[20px] flex flex-wrap">
-            {isLoading ? (
+            {isLoading && cartData.length === 0 ? (
               <p>Loading cart...</p>
-            ) : isError ? (
-              <p>Failed to load cart.</p>
             ) : cartData.length === 0 ? (
               <p>Your cart is empty.</p>
             ) : (
@@ -137,7 +64,7 @@ export default function CartPage(): JSX.Element {
         {/* OrderSummary hidden on mobile, shown on md+ */}
         {cartData.length > 0 && (
           <div className="hidden md:block">
-            <OrderSummary subtotal={totalCartPrice} />
+            <OrderSummary subtotal={subtotal} total={total} />
           </div>
         )}
         <MoreToExplore />
@@ -147,12 +74,15 @@ export default function CartPage(): JSX.Element {
             <div>
               <p className="text-[12px] text-[#6B6F75]">Total</p>
               <p className="text-[18px] font-bold text-[#0E1112]">
-                £{totalCartPrice.toFixed(2)}
+                £{data?.total}
               </p>
             </div>
-            <button className="bg-[#014162] text-white text-[14px] font-medium py-[14px] px-[32px] rounded-[10px]">
+            <Link
+              to="/checkout-1"
+              className="bg-[#014162] text-white text-[14px] font-medium py-[14px] px-[32px] rounded-[10px]"
+            >
               Continue To Checkout
-            </button>
+            </Link>
           </div>
         )}
       </div>

@@ -66,7 +66,7 @@ function App() {
           element: <CheckoutPage3 />,
         },
         {
-          path: "product-details",
+          path: "product-details/:id",
           element: <ProductDetails />,
         },
         {

@@ -2,8 +2,9 @@ import { calcFinalPrice, formatGBP } from "@/lib/utils/homePageFn";
 import Stars from "../common/Star";
 import type { Product } from "@/types/home/product";
 import { ShoppingCart } from "lucide-react";
-
+import { useCart } from "@/hooks/useCart";
 const HomeProductCard = ({ product }: { product: Product }) => {
+  const { addToCartHandler } = useCart();
   const { name, category, rating, owner, image, price, discount } = product;
   const finalPrice = calcFinalPrice(price, discount);
   return (
@@ -45,6 +46,9 @@ const HomeProductCard = ({ product }: { product: Product }) => {
           </div>
 
           <button
+            onClick={() => {
+              addToCartHandler(2, 3);
+            }}
             type="button"
             className="flex items-center gap-1 text-[14px] px-4 py-1 rounded-md bg-[#0b3b60] text-white"
           >
