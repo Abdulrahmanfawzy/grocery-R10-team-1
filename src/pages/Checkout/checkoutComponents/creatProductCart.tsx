@@ -1,19 +1,6 @@
 import "../../../index.css";
 import { currencyFormat } from "@/lib/utils/currencyFormat";
 import { useState } from "react";
-// interface Product {
-//   id: number;
-//   name: string;
-//   price: number;
-//   image: string;
-//   inStock: boolean;
-//   quantityOrdered: number;
-// }
-
-// interface Props {
-//   product: Product;
-//   islastProduct : boolean
-// }
 
 function CreatProductCart({ product , islastProduct } ) {
   
@@ -28,7 +15,7 @@ function CreatProductCart({ product , islastProduct } ) {
           alt={product.meal.title}
         />
         <h2 className=" bg-black text-xs font-thin text-white py-0.5 px-1 rounded-tl-lg rounded-br-lg ">
-          {product.inStock ? " In Stock" : " Out Of Stock"}
+          {product.meal.in_stock ? " In Stock" : " Out Of Stock"}
         </h2>
       </div>
       <div className=" flex flex-col  grow col-span-3  gap-2 ">

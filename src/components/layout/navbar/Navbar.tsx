@@ -8,7 +8,6 @@ const Navbar = () => {
   return (
     <div className="bg-primary-foreground py-4">
       <header className="mx-auto max-w-5xl px-4 md:px-6 lg:px-10 2xl:max-w-6xl">
-        {/* Desktop Navbar */}
         <div className="flex items-center justify-between">
           <Logo />
           <div className="hidden  gap-4 lg:flex">
