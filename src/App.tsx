@@ -21,6 +21,7 @@ import Home from "./pages/Home";
 import LoginPage from "./pages/authorization/login/LoginPage";
 import SignUpPage from "./pages/authorization/signup/SignUpPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Toaster } from "./components/ui/sonner";
 
 function App() {
   const queryClient = new QueryClient();
@@ -62,7 +63,7 @@ function App() {
           path: "profile",
           element: <ProfileLayout />,
           children: [
-            { path: "dashboard", element: <Dashboard /> },
+            { path: "dashboard", element: <Dashboard />, index: true },
             { path: "info", element: <PersonalInfo /> },
             { path: "orders-history", element: <OrderHistory /> },
             { path: "payments-wallet", element: <Wallet /> },
@@ -89,6 +90,19 @@ function App() {
   return (
     <div>
       <QueryClientProvider client={queryClient}>
+        <Toaster
+          position="top-center"
+          toastOptions={{
+            style: {
+              background: "#fff",
+              color: "#111",
+              borderRadius: "12px",
+              padding: "16px",
+              boxShadow: "0 10px 25px rgba(0,0,0,0.1)",
+              fontWeight: "500",
+            },
+          }}
+        />
         <RouterProvider router={routers} />
       </QueryClientProvider>
     </div>

@@ -7,7 +7,7 @@ import React from 'react'
 
 const Security = () => {
   return (
-    <div>
+    <>
       <div>
         <h1 className="text-2xl font-bold text-foreground">Security & Login</h1>
         <p className="text-muted-foreground text-sm mt-1">Manage your account security and login settings</p>
@@ -84,7 +84,7 @@ const Security = () => {
         <p className="text-sm text-destructive/70 mb-4">Once you delete your account, there is no going back. Please be certain.</p>
         <Button variant="destructive">Delete Account</Button>
       </div>
-    </div>
+    </>
   )
 }
 

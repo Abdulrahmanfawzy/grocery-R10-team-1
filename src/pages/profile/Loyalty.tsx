@@ -6,7 +6,7 @@ import React from "react";
 
 const Loyalty = () => {
   return (
-    <div>
+    <>
       <div>
         <h1 className="text-2xl font-bold text-foreground">
           Loyalty & Rewards
@@ -45,7 +45,10 @@ const Loyalty = () => {
             2,450 / 10,000 pts
           </span>
         </div>
-        <Progress  value={50.5} className="h-2 mb-1 [&>div]:bg-[linear-gradient(to_right,transparent_20%,var(--color-primary))]" />
+        <Progress
+          value={50.5}
+          className="h-2 mb-1 [&>div]:bg-[linear-gradient(to_right,transparent_20%,var(--color-primary))]"
+        />
         <p className="text-xs text-muted-foreground mb-4">
           7,550 points to go!
         </p>
@@ -132,7 +135,7 @@ const Loyalty = () => {
           </Button>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
