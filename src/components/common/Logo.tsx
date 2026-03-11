@@ -1,6 +1,14 @@
+import { Link } from "react-router-dom";
+
 const Logo = () => {
   return (
-    <img src="/src/assets/home/logo.svg" alt="Logo" className="h-8 w-auto" />
+    <Link to="/">
+      <img
+        src="/src/assets/home/logo.svg"
+        alt="Logo"
+        className="h-7.5 w-auto"
+      />
+    </Link>
   );
 };
 
