@@ -9,12 +9,12 @@ const notificationPreference = [
 const Settings = () => {
   return (
     <>
-      <div>
+      <>
         <h1 className="text-2xl font-bold text-foreground">Settings</h1>
         <p className="text-muted-foreground text-sm mt-1">
           Manage app preferences and privacy settings
         </p>
-      </div>
+      </>
 
       {/* Language */}
       <div className="bg-card rounded-lg border border-border p-6 my-5">

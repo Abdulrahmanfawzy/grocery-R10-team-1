@@ -1,15 +1,17 @@
 import { Button } from "@/components/ui/button";
 import { menuItems } from "@/lib/constants/sideBar/MockData";
+import type { Data, ProfileDataInterface } from "@/lib/types/Profile/Profile";
 import { Gift, LogOut, X } from "lucide-react";
-import  { useEffect } from "react";
+import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 interface MobileSidebarProps {
   open: boolean;
   onClose: () => void;
+  profileData: ProfileDataInterface;
 }
 
-const MobileSideBar = ({ open, onClose }: MobileSidebarProps) => {
+const MobileSideBar = ({ open, onClose, profileData }: MobileSidebarProps) => {
   const location = useLocation();
 
   // Close Sidebar when path name change
@@ -18,16 +20,13 @@ const MobileSideBar = ({ open, onClose }: MobileSidebarProps) => {
   }, [location.pathname]);
 
   return (
-    <div
-      className={`fixed inset-0 z-[100] lg:hidden w-fit`}
-    >
-
+    <div className={`fixed inset-0 z-[100] lg:hidden w-fit`}>
       <aside
         className={`absolute top-0 left-0 h-full w-[280px] bg-card shadow-2xl flex flex-col duration-300 transition-all ${
           open ? "translate-x-0" : "-translate-x-72"
         }`}
       >
-        {/* Header with profile */}
+        {/* Header profile */}
         <div className="p-5 bg-primary relative overflow-hidden">
           <Button
             onClick={onClose}
@@ -39,14 +38,16 @@ const MobileSideBar = ({ open, onClose }: MobileSidebarProps) => {
           <div className="flex items-center gap-3 relative z-10 mt-2">
             <div className="w-20 h-20 rounded-full bg-accent flex items-center justify-center text-xl font-bold text-accent-foreground shadow-lg ring-2 ring-primary-foreground/20">
               <img
-                src="/ImageWithFallback.png"
-                alt="User Photo"
-                className="rounded-full"
+                src={
+                  profileData.me?.profile_picture || "/ImageWithFallback.png"
+                }
+                alt={profileData.me?.name || "Unknown"}
+                className="w-full h-full rounded-full object-cover"
               />
             </div>
             <div>
               <p className="font-semibold text-primary-foreground text-lg">
-                Sarah
+                {profileData.me?.name || "Unknown"}
               </p>
               <span className="inline-flex items-center gap-1 text-xs font-medium text-accent bg-accent/20 rounded-full px-2 py-0.5 mt-0.5">
                 <Gift className="w-3 h-3" /> Gold Member
@@ -55,7 +56,7 @@ const MobileSideBar = ({ open, onClose }: MobileSidebarProps) => {
           </div>
         </div>
 
-        {/* Navigation */}
+        {/* Nav */}
         <nav className="flex-1 overflow-y-auto py-3 px-3">
           {menuItems.map((item, index) => {
             const isActive = location.pathname === item.path;

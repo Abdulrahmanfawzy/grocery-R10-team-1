@@ -1,3 +1,4 @@
+import type { DashboardData } from "@/types/profile/dashboard/DashboardData";
 import type React from "react";
 
 export interface UserData {
@@ -45,4 +46,7 @@ export interface Purchases {
   url: string;
   name: string;
   count: number;
+}
+export interface OrdersProps {
+  dashboardData: DashboardData;
 }

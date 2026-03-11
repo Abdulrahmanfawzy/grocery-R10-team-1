@@ -1,5 +1,13 @@
-import { Button } from '@/components/ui/button'
-import { Briefcase, CheckCircle, Clock, Home, Pencil, Plus, Trash2 } from 'lucide-react'
+import { Button } from "@/components/ui/button";
+import {
+  Briefcase,
+  CheckCircle,
+  Clock,
+  Home,
+  Pencil,
+  Plus,
+  Trash2,
+} from "lucide-react";
 
 const addresses = [
   {
@@ -24,30 +32,47 @@ const deliveryWindows = [
 
 const Addresses = () => {
   return (
-    <div>
+    <>
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-foreground">Delivery Addresses</h1>
-          <p className="text-muted-foreground text-sm mt-1">Manage your delivery locations and preferences</p>
+          <h1 className="text-2xl font-bold text-foreground">
+            Delivery Addresses
+          </h1>
+          <p className="text-muted-foreground text-sm mt-1">
+            Manage your delivery locations and preferences
+          </p>
         </div>
-        <Button><Plus className="w-4 h-4 mr-1" /> Add Address</Button>
+        <Button>
+          <Plus className="w-4 h-4 mr-1" /> Add Address
+        </Button>
       </div>
 
       {addresses.map((addr) => (
-        <div key={addr.label} className="bg-card rounded-lg border border-border p-6 my-5">
+        <div
+          key={addr.label}
+          className="bg-card rounded-lg border border-border p-6 my-5"
+        >
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2">
               <addr.icon className="w-5 h-5 text-card-foreground" />
-              <h2 className="font-semibold text-card-foreground">{addr.label}</h2>
+              <h2 className="font-semibold text-card-foreground">
+                {addr.label}
+              </h2>
             </div>
             <div className="flex gap-2">
-              <Button variant="outline" size="sm"><Pencil className="w-3 h-3 mr-1" /> Edit</Button>
-              <Button variant="outline" size="sm"><Trash2 className="w-3 h-3 mr-1" /> Cancel</Button>
+              <Button variant="outline" size="sm">
+                <Pencil className="w-3 h-3 mr-1" /> Edit
+              </Button>
+              <Button variant="outline" size="sm">
+                <Trash2 className="w-3 h-3 mr-1" /> Cancel
+              </Button>
             </div>
           </div>
           <p className="text-sm text-muted-foreground mb-3">{addr.address}</p>
           <div className="bg-muted rounded-lg p-3">
-            <p className="text-sm font-medium text-primary">📋 Delivery Instructions</p>
+            <p className="text-sm font-medium text-primary">
+              📋 Delivery Instructions
+            </p>
             <p className="text-sm text-muted-foreground">{addr.instructions}</p>
           </div>
         </div>
@@ -57,9 +82,13 @@ const Addresses = () => {
       <div className="bg-card rounded-lg border border-border p-6">
         <div className="flex items-center gap-2 mb-2">
           <Clock className="w-5 h-5 text-card-foreground" />
-          <h2 className="font-semibold text-card-foreground">Preferred Delivery Windows</h2>
+          <h2 className="font-semibold text-card-foreground">
+            Preferred Delivery Windows
+          </h2>
         </div>
-        <p className="text-sm text-muted-foreground mb-4">Select your preferred time slots for deliveries</p>
+        <p className="text-sm text-muted-foreground mb-4">
+          Select your preferred time slots for deliveries
+        </p>
         <div className="grid grid-cols-3 gap-3">
           {deliveryWindows.map((w) => (
             <div
@@ -69,7 +98,11 @@ const Addresses = () => {
               }`}
             >
               <div className="flex items-center justify-center gap-1">
-                <p className={`text-sm font-semibold ${w.selected ? "text-primary" : "text-card-foreground"}`}>{w.label}</p>
+                <p
+                  className={`text-sm font-semibold ${w.selected ? "text-primary" : "text-card-foreground"}`}
+                >
+                  {w.label}
+                </p>
                 {w.selected && <CheckCircle className="w-4 h-4 text-primary" />}
               </div>
               <p className="text-xs text-muted-foreground mt-1">{w.time}</p>
@@ -77,8 +110,8 @@ const Addresses = () => {
           ))}
         </div>
       </div>
-    </div>
-  )
-}
+    </>
+  );
+};
 
-export default Addresses
+export default Addresses;

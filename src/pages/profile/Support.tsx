@@ -12,7 +12,7 @@ const instructions = [
 
 const Support = () => {
   return (
-    <div>
+    <>
       <div>
         <h1 className="text-2xl font-bold text-foreground">Help & Support</h1>
         <p className="text-muted-foreground text-sm mt-1">
@@ -98,7 +98,7 @@ const Support = () => {
           <Button>Report</Button>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
