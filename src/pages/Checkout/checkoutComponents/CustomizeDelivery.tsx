@@ -18,6 +18,7 @@ function CustomizeDelivery() {
     queryFn: getAddresses,
   });
 
+  console.log(data)
 
   useEffect(() => {
     if (!isLoading && data.data?.[selectedAddresses]) {
