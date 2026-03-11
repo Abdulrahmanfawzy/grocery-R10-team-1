@@ -7,7 +7,8 @@ import container4 from "../assets/container4.png";
 import container5 from "../assets/container5.png";
 import WinterDiscount from "../components/productlisting/winterdiscount";
 import FeaturesBar from "../components/productlisting/featuresbar";
-
+import CategorySlider from "@/components/Category/CategorySlider";
+import newProducts from "@/data/home/newProducts";
 import { useState } from "react";
 
 // UI components
@@ -53,7 +54,7 @@ const ProductCard = () => {
     };
 
     return (
-        
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-0 ">
             {products.map((product, index) => (
                 <div key={index} className="bg-card  border-[0.8px] rounded-[8px] p-7 pl-2 pr-2 mr-10 ml-10 m-5 text-foreground hover:shadow-lg transition-shadow">
@@ -66,7 +67,7 @@ const ProductCard = () => {
                     <div className="flex justify-center items-center mb-4">
                         <img src={product.image} alt={product.name} className="h-40 object-contain group-hover:scale-105 transition-transform" />
                     </div>
-                    <div className="flex flex-col items-center justify-center text-center gap-">
+                    <div className="flex flex-col items-center justify-center text-center gap-2">
                         <div className="flex items-center justify-center gap-2">
                             <h3 className="font-display text-[#01050DCC] ">{product.name}</h3>
                             <span className="text-[#0E1112] font-body ">£ {product.price.toFixed(2)}</span>
@@ -108,7 +109,7 @@ const ProductList = () => {
     return (
         <div>
             {/* Hero */}
-         
+
             <div className="relative w-full h-\[400px]">
                 <img src={heroImage} alt="Shop" className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-linear-to-r from-primary/90 to-primary/80" />
@@ -122,8 +123,8 @@ const ProductList = () => {
             </div>
 
             <div>
-                <div className="flex gap-10 mt-30 px-40">
-                    <aside className="w-50 space-y-6">
+                <div className="flex flex-col lg:flex-row gap-6 mt-10 px-4 lg:px-20">
+                    <aside className="w-full lg:w-60 space-y-6">
                         {/* Categories */}
                         <div >
                             <h3 className="font-display text-lg mb-3 text-[#000000]">Categories</h3>
@@ -209,22 +210,26 @@ const ProductList = () => {
                         </div>
                     </aside>
 
-                    <div className="ml-10 w-full">
+                    <div className=" w-full">
                         <ProductCard />
+                        <CategorySlider
+                            categoryName="Fruits"
+                            Items={newProducts}
+                        />
                     </div>
                 </div>
             </div>
 
             {/* Winter Discount Section */}
-            <div className="w-full px-40 mt-30">
+            <div className="w-full px-4 lg:px-20 mt-10">
                 <WinterDiscount />
             </div>
 
             {/* Features Bar Section */}
-            <div className="w-full px-40 mt-20">
+            <div className="w-full px-4 lg:px-20 mt-10">
                 <FeaturesBar />
             </div>
-          
+
 
         </div>
     );

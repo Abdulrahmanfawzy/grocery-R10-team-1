@@ -21,7 +21,7 @@ import Home from "./pages/Home";
 import LoginPage from "./pages/authorization/login/LoginPage";
 import SignUpPage from "./pages/authorization/signup/SignUpPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Toaster } from "react-hot-toast";
+import { Toaster } from 'react-hot-toast';
 import ProtectedRoute from "./components/common/ProtectedRoute";
 import PublicRoute from "./components/common/PublicRoute";
 
