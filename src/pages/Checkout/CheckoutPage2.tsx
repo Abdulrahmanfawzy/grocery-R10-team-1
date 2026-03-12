@@ -5,6 +5,17 @@ import { useState } from "react";
 import "../../index.css";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
+import SaveCardForm from "./checkoutComponents/SaveCardForm";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { FieldGroup } from "@/components/ui/field";
+
 
 function CheckoutPage2() {
   const { setValue, formState, register, cartData, submitLoding } =
@@ -27,29 +38,24 @@ function CheckoutPage2() {
             <h2 className=" text-sm font-thin mb-2 text-gray-700">
               saved carde
             </h2>
-            <div className="flex items-center gap-2 mt-3  border border-gray-300 rounded-md p-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="size-6 text-blue-600"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z"
-                />
-              </svg>
-              <div className=" text-xs text-right text-gray-700">
-                <h2>visa********123</h2>
-                <h2>Expiers 12/3</h2>
-              </div>
-            </div>
-            <div className=" flex items-center justify-center mt-3  border border-gray-300 rounded-md p-2">
-              +add a new card
-            </div>
+            <Dialog>
+              <DialogTrigger asChild>
+                <div className=" cursor-pointer flex items-center justify-center mt-3  border border-gray-300 rounded-md p-2">
+                  +add a new card
+                </div>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-sm">
+                <DialogHeader>
+                  <DialogTitle>Add New Card</DialogTitle>
+                  <DialogDescription>
+                    Your information is secure , we will never save your card details
+                  </DialogDescription>
+                </DialogHeader>
+                <FieldGroup>
+                  <SaveCardForm email="mezohassan123" />
+                </FieldGroup>
+              </DialogContent>
+            </Dialog>
           </div>
           <div>
             <h2 className=" text-sm font-thin mb-2 text-gray-700">
