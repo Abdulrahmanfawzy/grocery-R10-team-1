@@ -1,5 +1,7 @@
+import Error from "@/components/common/Error";
+import Loading from "@/components/common/Loading";
 import PaymentHistory from "@/components/profile/payment/PaymentHistory";
-import PaymentsMethod from "@/components/profile/payment/PaymentSMethod";
+import PaymentsMethod from "@/components/profile/payment/PaymentsMethod";
 import { Button } from "@/components/ui/button";
 import { useGetDashboard } from "@/lib/api/profile/dashboardApi/use-getDashboard";
 import { useGetPaymentsHistory } from "@/lib/api/profile/paymentsApi/use-getPayments";
@@ -14,7 +16,8 @@ const Wallet = () => {
     isError: dashboardError,
   } = useGetDashboard();
 
-  if (isLoading || isPending) return <div className="">Loading....</div>;
+  if (isLoading || isPending) return <Loading />;
+  if (isError || dashboardError) return <Error error={data.message} />;
 
   const dashboardData: DashboardData = dashboard.data;
   return (

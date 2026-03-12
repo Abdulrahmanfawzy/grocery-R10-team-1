@@ -1,7 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "react-hot-toast";
-
 import ProtectedRoute from "./components/common/ProtectedRoute";
 import PublicRoute from "./components/common/PublicRoute";
 import LoginPage from "./pages/authorization/login/LoginPage";
@@ -77,7 +76,7 @@ function App() {
         {
           path: "profile",
           element: <ProfileLayout />,
-          children: [       
+          children: [
             { index: true, element: <Dashboard /> },
             { path: "dashboard", element: <Dashboard /> },
             { path: "personal-info", element: <PersonalInfo /> },

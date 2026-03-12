@@ -5,7 +5,7 @@ import Footer from "./footer/Footer";
 function MainLayout() {
   return (
     <div className="w-screen">
-      <Navbar />
+      {/* <Navbar /> */}
       <div>
         <Outlet />
       </div>

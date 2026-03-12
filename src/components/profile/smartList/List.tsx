@@ -1,16 +1,39 @@
 import { Button } from "@/components/ui/button";
 import { useGetSmartList } from "@/lib/api/profile/smartListApi/use-getSmartList";
 import type { ListInterface } from "@/types/profile/smartList/ListTypes";
-import { ShoppingBag, ShoppingCart, Trash2 } from "lucide-react";
+import {
+  Box,
+  Loader2,
+  ShoppingBag,
+  ShoppingCart,
+  Trash2,
+  View,
+  ViewIcon,
+} from "lucide-react";
 import EmptyState from "../dashboard/EmptyState";
+import { useDeleteList } from "@/lib/api/profile/smartListApi/use-deleteSmartList";
+import { useState } from "react";
+import EditList from "./listDialog/EditList";
+import { Link } from "react-router-dom";
 
-const List = () => {
-  const { data, isLoading, isError } = useGetSmartList();
-  console.log(data);
+interface Props {
+  lists: ListInterface;
+}
 
-  if (isLoading) return <div className="">Loading...</div>;
+const List = ({ lists }: Props) => {
+  const [deletingId, setDeletingId] = useState<number | null>(null);
+  const { mutate, isPending } = useDeleteList();
 
-  const lists: ListInterface = data;
+  const handleClick = (id: number) => {
+    setDeletingId(id);
+
+    mutate(id, {
+      onSettled: () => {
+        setDeletingId(null);
+      },
+    });
+  };
+
   return (
     <div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-5">
@@ -36,17 +59,33 @@ const List = () => {
                     </p>
                   </div>
                 </div>
-                <button className="text-muted-foreground hover:text-destructive transition-colors cursor-pointer">
-                  <Trash2 className="w-4 h-4" />
-                </button>
+                <Button
+                  key={list.id}
+                  variant={"destructive"}
+                  className="bg-red-400 cursor-pointer"
+                  onClick={() => handleClick(list.id)}
+                >
+                  {deletingId === list.id ? (
+                    <Loader2 className="w-4 animate-spin" />
+                  ) : (
+                    <Trash2 className="w-4 h-4" />
+                  )}
+                </Button>
               </div>
-              <div className="flex items-center gap-2">
-                <Button size="sm" className="gap-1 cursor-pointer">
-                  <ShoppingCart className="w-3 h-3" /> Add All to Cart
-                </Button>
-                <Button className="cursor-pointer" variant="ghost" size="sm">
-                  Edit
-                </Button>
+              <div className="flex items-center justify-between w-full mt-5">
+                <Link to={"/"}>
+                  <Button size="sm" className="gap-1 cursor-pointer">
+                    <Box className="w-3 h-3" /> View All items
+                  </Button>
+                </Link>
+                <EditList
+                  id={list.id}
+                  defaultValues={{
+                    name: list.name,
+                    description: list.description,
+                    meal_ids: list.meals.map((meal) => meal.id),
+                  }}
+                />
               </div>
             </div>
           ))

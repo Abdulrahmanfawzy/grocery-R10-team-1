@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button";
 import { getDate } from "@/lib/utils/getDate";
 import type {
   Datum,
-  PaymentInterface,
 } from "@/types/profile/payments/PaymentsType";
 import { ChevronRight, ShoppingBag } from "lucide-react";
 import EmptyState from "../dashboard/EmptyState";
