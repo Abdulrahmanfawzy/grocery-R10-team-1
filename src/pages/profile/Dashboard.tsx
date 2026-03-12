@@ -1,54 +1,35 @@
-import Greeting from "@/components/dashboard/Greeting";
-import RecentOrders from "@/components/dashboard/RecentOrders";
-import ShoppingInsight from "@/components/dashboard/ShoppingInsight";
-import TopPurchases from "@/components/dashboard/TopPurchases";
-import { Button } from "@/components/ui/button";
-import { cards } from "@/lib/constants/dashboard/MockData";
-import { ArrowRight, Calendar } from "lucide-react";
+import Error from "@/components/common/Error";
+import Loading from "@/components/common/Loading";
+import Greeting from "@/components/profile/dashboard/Greeting";
+import Orders from "@/components/profile/dashboard/Orders";
+import RecentOrders from "@/components/profile/dashboard/RecentOrders";
+import ShoppingInsight from "@/components/profile/dashboard/ShoppingInsight";
+import TopPurchases from "@/components/profile/dashboard/TopPurchases";
+import { useGetDashboard } from "@/lib/api/profile/dashboardApi/use-getDashboard";
+import type { ProfileDataInterface } from "@/lib/types/Profile/Profile";
+import { useOutletContext } from "react-router-dom";
 
 const Dashboard = () => {
+  const profileData = useOutletContext<ProfileDataInterface>();
+  const { data, isLoading, isError } = useGetDashboard();
+
+  if(isLoading)
+    return <Loading/>
+  if(isError)
+    <Error error={data.message}/>
+    
   return (
-    <div>
-      <Greeting />
-      <div className="my-8 grid grid-cols-1 lg:grid-cols-2 gap-3">
-        {cards.map((item) => (
-          <div className="bg-card rounded-lg border border-border p-5">
-            <div className="flex items-center justify-between mb-3">
-              <div className="flex items-center gap-2">
-                <Calendar className="w-4 h-4 text-muted-foreground" />
-                <h3 className="font-semibold text-sm text-card-foreground">
-                  {item.title}
-                </h3>
-              </div>
-              <Button variant="outline" size="sm" className="text-xs h-7">
-                {item.buttonText}
-              </Button>
-            </div>
-            <div className="bg-[#F7FCFF] p-3 rounded-lg shadow">
-              <p className="text-card-foreground text-sm mb-1">
-                {item.mainInfo}
-              </p>
-              <p className="text-xs text-muted-foreground">{item.subInfo}</p>
-              <p className="text-xs text-muted-foreground mb-4">
-                {item.extraInfo}
-              </p>
-            </div>
-            <Button
-              className="w-full bg-primary text-primary-foreground 
-            hover:bg-primary/90 text-sm flex items-center gap-2 mt-2"
-            >
-              {item.linkText}
-              <ArrowRight />
-            </Button>
-          </div>
-        ))}
+    <>
+      <Greeting dashboardData={data.data} profileData={profileData} />
+      <div className="my-8">
+        <Orders dashboardData={data.data} />
       </div>
-      <ShoppingInsight />
+      <ShoppingInsight dashboardData={data.data} />
       <div className="flex grid grid-cols-1 md:grid-cols-2 gap-5">
-        <RecentOrders />
-        <TopPurchases />
+        <RecentOrders dashboardData={data.data} />
+        <TopPurchases dashboardData={data.data} />
       </div>
-    </div>
+    </>
   );
 };
 

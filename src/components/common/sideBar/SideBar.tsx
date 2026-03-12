@@ -2,20 +2,27 @@ import { Link } from "react-router-dom";
 
 import { menuItems } from "@/lib/constants/sideBar/MockData";
 import { Crown } from "lucide-react";
+import type { ProfileDataInterface } from "@/lib/types/Profile/Profile";
 
-function SideBar() {
+interface SideBarProps {
+  profileData: ProfileDataInterface;
+}
+
+function SideBar({ profileData }: SideBarProps) {
   return (
     <>
       {/* Web  */}
-      <aside className="w-75 h-fit hidden lg:block shrink-0 rounded-lg  border border-border ">
+      <aside className="w-70 h-fit hidden lg:block shrink-0 rounded-lg  border border-border ">
         {/* User Data  */}
         <div className="bg-card rounded-lg p-5 border-b">
           <div className="flex items-center gap-5 mb-6 ">
             <div className="w-20 h-20 rounded-full bg-muted relative">
               <img
-                src="/public/ImageWithFallback.png"
-                alt="User Photo"
-                className="w-fit rounded-full"
+                src={
+                  profileData.me?.profile_picture || "/ImageWithFallback.png"
+                }
+                alt={profileData?.me?.name || "Unknown"}
+                className="w-full h-full rounded-full object-cover "
               />
               <span
                 className="absolute bottom-0 right-0 bg-[#F7FCFF] p-1
@@ -25,7 +32,9 @@ function SideBar() {
               </span>
             </div>
             <div>
-              <p className="font-semibold text-card-foreground">Sarah</p>
+              <p className="font-semibold text-card-foreground">
+                {profileData.me?.firstName || "Unknown"}
+              </p>
               <p className="text-sm text-primary font-medium">Gold Member</p>
             </div>
           </div>

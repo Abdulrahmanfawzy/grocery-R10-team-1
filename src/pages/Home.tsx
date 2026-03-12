@@ -1,5 +1,5 @@
 import BannersSection from "@/components/home/Sections/BannersSection";
-// import DailyBestSellsSection from "@/components/home/Sections/DailyBestSellsSection";
+import DailyBestSellsSection from "@/components/home/Sections/DailyBestSellsSection";
 import FeatureSection from "@/components/home/Sections/FeatureSection";
 import HeroSection from "@/components/home/Sections/HeroSection";
 import HotDealsSection from "@/components/home/Sections/HotDealsSection";
@@ -9,11 +9,11 @@ const Home = () => {
   return (
     <div>
       <HeroSection />
-      <div className="max-w-5xl 2xl:max-w-6xl mx-auto p-10">
+      <div className="max-w-5xl 2xl:max-w-6xl mx-auto px-10 pt-24 pb-16 space-y-18">
         <HotDealsSection />
         <NewProductSection />
         <BannersSection />
-        {/* <DailyBestSellsSection /> */}
+        <DailyBestSellsSection />
         <FeatureSection />
       </div>
     </div>
