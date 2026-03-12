@@ -116,7 +116,7 @@ function App() {
   ]);
 
   return (
-    <div>
+    <div className="overflow-x-hidden">
       <QueryClientProvider client={queryClient}>
         <RouterProvider router={routers} />
         <Toaster
