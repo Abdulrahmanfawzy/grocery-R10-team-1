@@ -9,7 +9,7 @@ const Home = () => {
   return (
     <div>
       <HeroSection />
-      <div className="max-w-5xl 2xl:max-w-6xl mx-auto p-10">
+      <div className="max-w-5xl 2xl:max-w-6xl mx-auto px-10 pt-24 pb-16 space-y-18">
         <HotDealsSection />
         <NewProductSection />
         <BannersSection />

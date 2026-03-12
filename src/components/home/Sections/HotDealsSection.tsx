@@ -15,7 +15,7 @@ const HotDealsSection = () => {
   const { data, isLoading } = useGetHotDeals(Number(activeHotDeals));
 
   return (
-    <section className="mb-16">
+    <section className="">
       {/* Header */}
       <div className="mb-4">
         <h2 className="m-0 text-[28px] font-semibold leading-tight text-gray-800 md:text-3xl">
@@ -28,11 +28,7 @@ const HotDealsSection = () => {
           />
         </div>
       </div>
-      <HomeProductCarousel
-        data={data || []}
-        isLoading={isLoading}
-        error={false}
-      />
+      <HomeProductCarousel data={data || []} isLoading={isLoading} />
     </section>
   );
 };

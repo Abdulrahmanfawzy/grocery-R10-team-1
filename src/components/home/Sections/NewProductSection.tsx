@@ -13,7 +13,7 @@ const NewProductSection = () => {
   const { data, isLoading } = useGetNewProducts(Number(activeNewProducts));
 
   return (
-    <section className="mb-16">
+    <section>
       {/* Header */}
       <div className="mb-4">
         <h2 className="m-0 text-[28px] font-semibold leading-tight text-gray-800 md:text-3xl">
