@@ -4,34 +4,37 @@ import type { Product } from "@/types/home/product";
 import { ShoppingCart } from "lucide-react";
 
 const HomeProductCard = ({ product }: { product: Product }) => {
-  const { name, category, rating, owner, image, price, discount }: Product =
-    product;
-  const finalPrice = calcFinalPrice(price, discount);
+  const finalPrice = calcFinalPrice(product.price, product.discount_price);
   return (
     <div className="flex flex-col gap-2 rounded-[10px] border border-gray-100 bg-white p-4 ">
       <div className="grid h-[120px] place-items-center rounded-[10px] bg-white">
         <img
-          src={image}
-          alt={name}
+          src={product.image_url}
+          alt={product.title}
           className="max-h-[110px] w-full object-contain"
           loading="lazy"
         />
       </div>
       <div className="flex flex-col gap-1">
-        <div className="mt-1 text-[13px] text-gray-400">{category}</div>
+        <div className="mt-1 text-[13px] text-gray-400">
+          {product.category.name}
+        </div>
 
         <h3
           className="m-0 truncate text-[18px] font-ligt text-slate-900"
-          title={name}
+          title={product.title}
         >
-          {name}
+          {product.title}
         </h3>
 
         <div>
-          <Stars value={rating} />
+          <Stars value={5} />
 
           <div className="text-[13px] text-gray-400">
-            By <span className="font-medium text-[#0b3b60]">{owner}</span>
+            By{" "}
+            <span className="font-medium text-[#0b3b60]">
+              {product.category.name}
+            </span>
           </div>
         </div>
 
@@ -41,13 +44,13 @@ const HomeProductCard = ({ product }: { product: Product }) => {
               {formatGBP(finalPrice)}
             </span>
             <span className="text-[14px] text-gray-400 line-through">
-              £{price.toFixed(2)}
+              £{product.price.toFixed(2)}
             </span>
           </div>
 
           <button
             type="button"
-            className="flex items-center gap-1 text-[14px] px-4 py-1 rounded-md bg-[#0b3b60] text-white"
+            className="flex items-center gap-1 text-[14px] px-4 py-1 rounded-md bg-[#0b3b60] text-white cursor-pointer"
           >
             <ShoppingCart size={12} />
             Add

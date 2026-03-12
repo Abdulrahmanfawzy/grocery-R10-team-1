@@ -1,23 +1,19 @@
-import { useEffect, useState } from "react";
-import hotDealsProducts from "@/data/home/hotDealsProducts";
-import CategoriesNavItems from "../CategoriesNavItems";
-import HomeProductCard from "../HomeProductCard";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
-import useGetHotDeals from "@/hooks/home/useGetHotDeals";
+import CategoriesNavItems from "../common/CategoriesNavItems";
 
+import useGetHotDeals from "@/hooks/useGetHotDeals";
+import { useDispatch, useSelector } from "react-redux";
+import { updateHotDeals } from "@/store/slices/homeSlice";
+import type { RootState } from "@/store/store";
+import HomeProductCarousel from "../common/HomeProductCarousel";
+
+// the component start from here
 const HotDealsSection = () => {
-  const { data } = useGetHotDeals();
-  useEffect(() => {
-    console.log(data);
-  }, []);
+  const dispatch = useDispatch();
+  const activeHotDeals = useSelector(
+    (state: RootState) => state.home.activeHotDeals,
+  );
+  const { data, isLoading } = useGetHotDeals(Number(activeHotDeals));
 
-  const [activeCategory, setActiveCategory] = useState<string>("Vegetables");
   return (
     <section className="mb-16">
       {/* Header */}
@@ -25,27 +21,18 @@ const HotDealsSection = () => {
         <h2 className="m-0 text-[28px] font-semibold leading-tight text-gray-800 md:text-3xl">
           Hot Deals
         </h2>
-        <CategoriesNavItems
-          activeCategory={activeCategory}
-          handleActiveCategory={setActiveCategory}
-        />
+        <div className="flex justify-end">
+          <CategoriesNavItems
+            activeCategory={activeHotDeals}
+            onActiveCategory={(value) => dispatch(updateHotDeals(value))}
+          />
+        </div>
       </div>
-      <div>
-        <Carousel>
-          <CarouselContent className="px-5">
-            {hotDealsProducts.map((product) => (
-              <CarouselItem
-                key={product.id}
-                className="sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5"
-              >
-                <HomeProductCard product={product} key={product.id} />
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
-        </Carousel>
-      </div>
+      <HomeProductCarousel
+        data={data || []}
+        isLoading={isLoading}
+        error={false}
+      />
     </section>
   );
 };

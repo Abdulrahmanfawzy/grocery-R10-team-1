@@ -3,7 +3,7 @@ import axiosInstance from "../Axios/axiosInstance";
 
 const getDailyBestSellsItems = async (): Promise<ProductsAPIResponse> => {
   const { data } = await axiosInstance.get("/api/best-sells");
-  return data;
+  return data.data;
 };
 
 export { getDailyBestSellsItems };

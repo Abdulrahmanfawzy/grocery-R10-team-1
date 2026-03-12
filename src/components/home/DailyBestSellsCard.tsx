@@ -1,6 +1,7 @@
 import { ShoppingCart } from "lucide-react";
 import Rating from "../common/Rating";
 import { formatGBP } from "@/lib/utils/homePageFn";
+import Stars from "../common/Star";
 
 const DailyBestSellsCard = ({
   image,
@@ -19,7 +20,7 @@ const DailyBestSellsCard = ({
         <img
           src={image}
           alt={image}
-          className="max-h-[110px] w-full object-contain"
+          className="h-[110px] w-full object-contain"
           loading="lazy"
         />
       </div>
@@ -29,7 +30,7 @@ const DailyBestSellsCard = ({
           <h3>Hala Sasag 240g</h3>
         </div>
         <div>
-          <Rating rating={rating} />
+          <Stars value={rating} />
 
           <div className="text-[13px] text-gray-400">
             By <span className="font-medium text-[#0b3b60]">Mr.xoo</span>

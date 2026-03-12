@@ -1,5 +1,5 @@
 import BannersSection from "@/components/home/Sections/BannersSection";
-// import DailyBestSellsSection from "@/components/home/Sections/DailyBestSellsSection";
+import DailyBestSellsSection from "@/components/home/Sections/DailyBestSellsSection";
 import FeatureSection from "@/components/home/Sections/FeatureSection";
 import HeroSection from "@/components/home/Sections/HeroSection";
 import HotDealsSection from "@/components/home/Sections/HotDealsSection";
@@ -13,7 +13,7 @@ const Home = () => {
         <HotDealsSection />
         <NewProductSection />
         <BannersSection />
-        {/* <DailyBestSellsSection /> */}
+        <DailyBestSellsSection />
         <FeatureSection />
       </div>
     </div>
