@@ -1,42 +1,29 @@
-import Logo from "@/components/common/Logo";
-import { useState } from "react";
-import NavbarButtons from "./NavbarButtons";
+import NavSearchBar from "./NavSearchBar";
+import Logo from "../../common/Logo";
 import NavbarLinks from "./NavbarLinks";
-import { Menu, X } from "lucide-react";
+import NavbarButtons from "./NavbarButtons";
+import MobileNavbar from "./MobileNavbar";
 
-const MobileNavbar = () => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
+const Navbar = () => {
   return (
-    <div className="w-full lg:hidden">
-      <div className="flex items-center justify-between gap-4 w-full">
-        <Logo />
+    <div className="bg-primary-foreground py-4">
+      <header className="mx-auto max-w-5xl px-4 md:px-6 lg:px-10 2xl:max-w-6xl">
+        <div className="flex items-center justify-between">
+          <div className="hidden  gap-4 lg:flex">
+            <Logo />
+            <div className="flex items-center justify-between gap-4">
+              <NavbarLinks />
+              <NavSearchBar />
+              <NavbarButtons />
+            </div>
+          </div>
 
-        <button
-          type="button"
-          onClick={() => setIsMobileMenuOpen((prev) => !prev)}
-          className="rounded-md p-2 text-foreground transition-colors hover:bg-gray-100"
-          aria-expanded={isMobileMenuOpen}
-          aria-label={
-            isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"
-          }
-        >
-          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
-      </div>
-
-      <div
-        className={`overflow-hidden transition-all duration-300 ${
-          isMobileMenuOpen ? "mt-4 max-h-96 opacity-100" : "max-h-0 opacity-0"
-        }`}
-      >
-        <div className="flex flex-col gap-4 border-t pt-4">
-          <NavbarLinks className="flex-col items-start space-y-4" />
-          <NavbarButtons className="flex-col items-start gap-4" />
+          {/* Mobile Navbar */}
+          <MobileNavbar />
         </div>
-      </div>
+      </header>
     </div>
   );
 };
 
-export default MobileNavbar;
+export default Navbar;
