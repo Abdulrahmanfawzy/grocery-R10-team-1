@@ -58,7 +58,7 @@ const ProfileDetails = ({ profileData }: Props) => {
       {/* Inputs */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {formFields.map((field) => (
-          <div>
+          <div key={field.name}>
             <label
               id="firstName"
               className="text-sm text-muted-foreground mb-1 block"

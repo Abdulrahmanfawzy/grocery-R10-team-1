@@ -1,28 +1,18 @@
 import { Button } from "@/components/ui/button";
-import { useGetSmartList } from "@/lib/api/profile/smartListApi/use-getSmartList";
 import type { ListInterface } from "@/types/profile/smartList/ListTypes";
-import {
-  Box,
-  Loader2,
-  ShoppingBag,
-  ShoppingCart,
-  Trash2,
-  View,
-  ViewIcon,
-} from "lucide-react";
+import { Box, Loader2, ShoppingBag, Trash2 } from "lucide-react";
 import EmptyState from "../dashboard/EmptyState";
 import { useDeleteList } from "@/lib/api/profile/smartListApi/use-deleteSmartList";
 import { useState } from "react";
 import EditList from "./listDialog/EditList";
 import { Link } from "react-router-dom";
-
 interface Props {
   lists: ListInterface;
 }
 
 const List = ({ lists }: Props) => {
   const [deletingId, setDeletingId] = useState<number | null>(null);
-  const { mutate, isPending } = useDeleteList();
+  const { mutate } = useDeleteList();
 
   const handleClick = (id: number) => {
     setDeletingId(id);
@@ -73,7 +63,10 @@ const List = ({ lists }: Props) => {
                 </Button>
               </div>
               <div className="flex items-center justify-between w-full mt-5">
-                <Link to={"/"}>
+                <Link
+                  to={`/profile/list-items/${list.id}`}
+                  state={{ id: list.id }}
+                >
                   <Button size="sm" className="gap-1 cursor-pointer">
                     <Box className="w-3 h-3" /> View All items
                   </Button>

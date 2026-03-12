@@ -1,4 +1,3 @@
-import { Trash2 } from "lucide-react";
 import DeleteAccount from "../deleteAccount/DeleteAccount";
 
 const DataManagement = () => {

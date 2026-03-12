@@ -19,13 +19,13 @@ import Support from "./pages/profile/Support";
 import Settings from "./pages/profile/Settings";
 import CategoryPage from "./pages/Category/CategoryPage";
 import Home from "./pages/Home";
-import ProductDetails from "./pages/ProductDetails";
 import CartPage from "./pages/CartPage";
 import ProductList from "./product-list/productlist";
 import CheckoutLayOut from "./components/layout/checkout/CheckoutLayOut";
 import CheckoutPage1 from "./pages/Checkout/CheckoutPage1";
 import CheckoutPage2 from "./pages/Checkout/CheckoutPage2";
 import CheckoutPage3 from "./pages/Checkout/CheckoutPage3";
+import ListItems from "./pages/profile/ListItems";
 
 function App() {
   const queryClient = new QueryClient();
@@ -87,6 +87,7 @@ function App() {
             { path: "orders-history", element: <OrderHistory /> },
             { path: "payments-wallet", element: <Wallet /> },
             { path: "smart-list", element: <SmartList /> },
+            { path: "list-items/:id", element: <ListItems /> },
             { path: "addresses", element: <Addresses /> },
             { path: "loyalty", element: <Loyalty /> },
             { path: "security", element: <Security /> },
@@ -117,19 +118,6 @@ function App() {
   return (
     <div>
       <QueryClientProvider client={queryClient}>
-        <Toaster
-          position="top-center"
-          toastOptions={{
-            style: {
-              background: "#fff",
-              color: "#111",
-              borderRadius: "12px",
-              padding: "16px",
-              boxShadow: "0 10px 25px rgba(0,0,0,0.1)",
-              fontWeight: "500",
-            },
-          }}
-        />
         <RouterProvider router={routers} />
         <Toaster
           position="top-right"

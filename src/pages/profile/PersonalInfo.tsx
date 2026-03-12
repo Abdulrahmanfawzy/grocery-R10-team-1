@@ -11,10 +11,10 @@ import { useOutletContext } from "react-router-dom";
 
 function PersonalInfo() {
   const { data, isLoading, isError } = useGetNotifications();
+  const profileData = useOutletContext<ProfileDataInterface>();
   if (isLoading) return <Loading />;
   if (isError) return <Error error={data.message} />;
   const notificationsData: NotificationsInterface = data?.data;
-  const profileData = useOutletContext<ProfileDataInterface>();
   return (
     <>
       <h3 className=" font-semibold mb-2">Personal Information</h3>

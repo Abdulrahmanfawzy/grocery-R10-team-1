@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { useGetFavorites } from "@/lib/api/profile/smartListApi/use-getFavorite";
 import type { FavoriteInterface } from "@/types/profile/smartList/FavoritesTypes";
 import EmptyState from "../dashboard/EmptyState";
 import { ShoppingBag } from "lucide-react";

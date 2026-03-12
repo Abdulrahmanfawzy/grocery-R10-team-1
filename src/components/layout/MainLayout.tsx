@@ -4,8 +4,8 @@ import Footer from "./footer/Footer";
 
 function MainLayout() {
   return (
-    <div className="w-screen">
-      {/* <Navbar /> */}
+    <div className="w-screen overflow-x-hidden">
+      <Navbar />
       <div>
         <Outlet />
       </div>

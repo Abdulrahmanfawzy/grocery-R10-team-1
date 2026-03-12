@@ -21,6 +21,8 @@ const SmartList = () => {
   if (isError || favoriteError)
     return <Error error={data.message || favoritesData.message} />;
 
+  console.log(data);
+
   return (
     <>
       <div className="flex items-center justify-between">

@@ -11,13 +11,12 @@ import { Sun } from "lucide-react";
 
 const Settings = () => {
   const { data, isLoading, isError } = useGetNotifications();
+  const { isDark, toggle } = useDarkMode();
 
   if (isLoading) return <Loading />;
   if (isError) return <Error error={data.message} />;
 
   const notifications: NotificationsInterface = data?.data;
-
-  const { isDark, toggle } = useDarkMode();
 
   return (
     <>
