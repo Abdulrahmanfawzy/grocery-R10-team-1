@@ -20,7 +20,6 @@ import Support from "./pages/profile/Support";
 import Settings from "./pages/profile/Settings";
 import CategoryPage from "./pages/Category/CategoryPage";
 import Home from "./pages/Home";
-import ProductDetails from "./pages/ProductDetails";
 import CartPage from "./pages/CartPage";
 import ProductList from "./product-list/productlist";
 import CheckoutLayOut from "./components/layout/checkout/CheckoutLayOut";
