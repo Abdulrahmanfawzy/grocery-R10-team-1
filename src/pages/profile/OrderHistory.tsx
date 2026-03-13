@@ -1,3 +1,5 @@
+import Error from "@/components/common/Error";
+import Loading from "@/components/common/Loading";
 import OrdersDetails from "@/components/profile/ordersHistory/OrdersDetails";
 import { useGetOrders } from "@/lib/api/profile/ordersHistory/use-getOrders";
 import { ChevronDown, Search } from "lucide-react";
@@ -5,7 +7,8 @@ import { ChevronDown, Search } from "lucide-react";
 function OrderHistory() {
   const { data, isLoading, isError } = useGetOrders();
 
-  if (isLoading) return <div className="">Loading....</div>;
+  if (isLoading) return <Loading />;
+  if (isError) return <Error error={data.message} />;
 
   return (
     <>

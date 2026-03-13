@@ -5,6 +5,7 @@ import type {
   DashboardData,
   TopPurchase,
 } from "@/types/profile/dashboard/DashboardData";
+import AddToCart from "../addToCart/AddToCart";
 
 interface Props {
   dashboardData: DashboardData;
@@ -35,10 +36,17 @@ function TopPurchases({ dashboardData }: Props) {
       ) : (
         <div className="space-y-3">
           {topPurchases.map((p) => (
-            <div key={p.meal_id} className="flex items-center justify-between border-border border-t-2 p-1">
+            <div
+              key={p.meal_id}
+              className="flex items-center justify-between border-border border-t-2 p-1"
+            >
               <div className="flex items-center gap-3 ">
                 <div className=" w-16 h-16  ">
-                <img src={p.image_url} alt={p.title} className="object-cover rounded-full w-full h-full" />
+                  <img
+                    src={p.image_url}
+                    alt={p.title}
+                    className="object-cover rounded-full w-full h-full"
+                  />
                 </div>
                 <div>
                   <p className="text-sm font-medium text-card-foreground">
@@ -49,12 +57,7 @@ function TopPurchases({ dashboardData }: Props) {
                   </p>
                 </div>
               </div>
-              <Button
-                size="sm"
-                className="bg-primary text-primary-foreground hover:bg-primary/90 text-xs h-7 px-3"
-              >
-                Add
-              </Button>
+              <AddToCart id={p.meal_id} quantity={1} />
             </div>
           ))}
         </div>

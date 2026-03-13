@@ -1,3 +1,5 @@
+import Error from "@/components/common/Error";
+import Loading from "@/components/common/Loading";
 import Greeting from "@/components/profile/dashboard/Greeting";
 import Orders from "@/components/profile/dashboard/Orders";
 import RecentOrders from "@/components/profile/dashboard/RecentOrders";
@@ -9,11 +11,13 @@ import { useOutletContext } from "react-router-dom";
 
 const Dashboard = () => {
   const profileData = useOutletContext<ProfileDataInterface>();
-  const { data, isLoading, isError, isSuccess } = useGetDashboard();
+  const { data, isLoading, isError } = useGetDashboard();
 
-  if (isError) return <div className="">Error</div>;
-
-  if (isLoading) return <div className="">Loading....</div>;
+  if(isLoading)
+    return <Loading/>
+  if(isError)
+    <Error error={data.message}/>
+    
   return (
     <>
       <Greeting dashboardData={data.data} profileData={profileData} />

@@ -39,12 +39,7 @@ function ShoppingInsight({ dashboardData }: props) {
     },
   ];
 
-  const categories = dashboardData?.category_distribution || [
-    { name: "Fresh Produce", pct: 65 },
-    { name: "Dairy", pct: 45 },
-    { name: "Bakery", pct: 38 },
-    { name: "Snacks", pct: 28 },
-  ];
+  const categories = dashboardData?.category_distribution || [];
 
   return (
     <div className="my-5 shadow-2xl border border-border p-5">
@@ -65,15 +60,18 @@ function ShoppingInsight({ dashboardData }: props) {
 
       <div className="mt-10">
         {categories.map((c) => (
-          <div key={c.name} className="flex gap-3 space-y-4 items-baseline ">
+          <div
+            key={c.category_name}
+            className="flex gap-3 space-y-4 items-baseline "
+          >
             <div className="flex-1 bg-muted rounded-full h-2 overflow-hidden">
               <div
                 className={`bg-[linear-gradient(to_right,transparent_20%,var(--color-primary))] h-full rounded-full`}
-                style={{ width: `${c.pct}%` }}
+                style={{ width: `${c.percentage}%` }}
               />
             </div>
             <span className="text-xs text-primary w-32 shrink-0">
-              {c.name} ({c.pct}%)
+              {c.category_name} ({c.percentage}%)
             </span>
           </div>
         ))}

@@ -1,29 +1,34 @@
-import newProducts from "@/data/home/newProducts";
-import CategoriesNavItems from "../CategoriesNavItems";
-import { useState } from "react";
-import HomeProductCard from "../HomeProductCard";
+import CategoriesNavItems from "../common/CategoriesNavItems";
+import HomeProductCarousel from "../common/HomeProductCarousel";
+import type { RootState } from "@/store/store";
+import { useDispatch, useSelector } from "react-redux";
+import useGetNewProducts from "@/hooks/useNewProducts";
+import { updateNewProductsSelector } from "@/store/slices/homeSlice";
 
 const NewProductSection = () => {
-  const [activeCategory, setActiveCategory] = useState<string>("Fruits");
+  const dispatch = useDispatch();
+  const activeNewProducts = useSelector(
+    (state: RootState) => state.home.activeNewProducts,
+  );
+  const { data, isLoading } = useGetNewProducts(Number(activeNewProducts));
+
   return (
-    <section className="mb-16">
+    <section>
+      {/* Header */}
       <div className="mb-4">
         <h2 className="m-0 text-[28px] font-semibold leading-tight text-gray-800 md:text-3xl">
           New Products
         </h2>
-        <CategoriesNavItems
-          activeCategory={activeCategory}
-          handleActiveCategory={setActiveCategory}
-        />
-      </div>
-
-      <div>
-        <div className="grid grid-cols-5 gap-4">
-          {newProducts.map((product) => (
-            <HomeProductCard product={product} key={product.id} />
-          ))}
+        <div className="flex justify-end">
+          <CategoriesNavItems
+            activeCategory={activeNewProducts}
+            onActiveCategory={(value) =>
+              dispatch(updateNewProductsSelector(value))
+            }
+          />
         </div>
       </div>
+      <HomeProductCarousel data={data || []} isLoading={isLoading} />
     </section>
   );
 };
