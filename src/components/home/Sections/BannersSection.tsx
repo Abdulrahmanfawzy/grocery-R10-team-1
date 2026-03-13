@@ -1,6 +1,6 @@
 const BannersSection = () => {
   return (
-    <div className="flex gap-5 flex-col md:flex-row  mb-10">
+    <div className="flex gap-5 flex-col md:flex-row">
       {/* Left Card  */}
       <div
         className={`w-full flex justify-between rounded-lg h-48  bg-[#BCB8B1] `}

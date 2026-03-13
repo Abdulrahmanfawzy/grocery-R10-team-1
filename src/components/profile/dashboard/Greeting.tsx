@@ -8,8 +8,6 @@ interface GreetingProps {
 }
 
 function Greeting({ dashboardData, profileData }: GreetingProps) {
-  console.log(dashboardData);
-
   const userData = [
     {
       icon: Package,

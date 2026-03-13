@@ -6,6 +6,7 @@ import type { CartItem } from "../types/cart";
 import { ProductSelector } from "../components/cart/ProductSelector";
 import { OrderSummary } from "../components/cart/OrderSummary";
 import { MoreToExplore } from "../components/cart/MoreToExplore";
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
 export default function CartPage(): JSX.Element {
   const [cartData, setCartData] = useState<CartItem[]>([]);
@@ -115,4 +116,10 @@ export default function CartPage(): JSX.Element {
       </div>
     </>
   );
+<<<<<<< HEAD
 }
+=======
+
+}
+
+>>>>>>> 770f9a5e52d0a4693cac5ef0fe9785f08af593bc

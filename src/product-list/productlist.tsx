@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import {
+=======
+﻿import {
+>>>>>>> 770f9a5e52d0a4693cac5ef0fe9785f08af593bc
   Apple,
   Beef,
   Carrot,
@@ -7,11 +11,21 @@ import {
   Shrimp,
   Search,
   Minus,
+<<<<<<< HEAD
+=======
+  Plus,
+  Star,
+  Trash,
+>>>>>>> 770f9a5e52d0a4693cac5ef0fe9785f08af593bc
 } from "lucide-react";
 import heroImage from "../assets/heroimg1.jpg";
 import WinterDiscount from "../components/productlisting/winterdiscount";
 import FeaturesBar from "../components/productlisting/featuresbar";
+<<<<<<< HEAD
 import { getProductCard } from "@/lib/api/ProductList";
+=======
+import { getProductCard } from "@/lib/api/Productlist";
+>>>>>>> 770f9a5e52d0a4693cac5ef0fe9785f08af593bc
 import CategoryCard from "@/components/common/MainCard";
 
 import { useQuery } from "@tanstack/react-query";
@@ -36,15 +50,81 @@ const brands = ["Brand A", "Brand B", "Brand C"];
 const productTypes = ["Fresh", "Organic", "Frozen"];
 const availability = ["In stock", "Out of stock"];
 
-const ProductList = () => {
-  const [priceRange, setPriceRange] = useState([50, 80]);
-  const [selectedCategory, setSelectedCategory] = useState("Fruits");
-
+<<<<<<< HEAD
+=======
+const ProductCard = () => {
   const { data, isLoading } = useQuery({
     queryKey: ["getProductCard"],
     queryFn: getProductCard,
   });
 
+  const [quantities, setQuantities] = useState<number[]>(new Array(5).fill(1));
+
+  const products = [
+    {
+      name: "Peach",
+      price: 32.0,
+      oldPrice: 35.0,
+      image: container1,
+      rating: 4,
+    },
+    {
+      name: "Pineapple",
+      price: 50.0,
+      oldPrice: 55.0,
+      image: container2,
+      rating: 4,
+    },
+    {
+      name: "Rambutan",
+      price: 70.0,
+      oldPrice: 80.0,
+      image: container3,
+      rating: 5,
+    },
+    {
+      name: "Green Apple",
+      price: 45.0,
+      oldPrice: 50.0,
+      image: container4,
+      rating: 4,
+    },
+    { name: "Kiwi", price: 60.0, oldPrice: 65.0, image: container5, rating: 4 },
+  ];
+
+  const increase = (index: number) => {
+    const updated = [...quantities];
+    updated[index]++;
+    setQuantities(updated);
+  };
+
+  const decrease = (index: number) => {
+    const updated = [...quantities];
+    if (updated[index] > 1) updated[index]--;
+    setQuantities(updated);
+  };
+
+  return (
+    <div className="grid grid-cols-1  lg:grid-cols-2 gap-3 ">
+      {!isLoading &&
+       data?.data?.map((product:any) => <CategoryCard meal={product} />)}
+    </div>
+  );
+};
+
+>>>>>>> 770f9a5e52d0a4693cac5ef0fe9785f08af593bc
+const ProductList = () => {
+  const [priceRange, setPriceRange] = useState([50, 80]);
+  const [selectedCategory, setSelectedCategory] = useState("Fruits");
+
+<<<<<<< HEAD
+  const { data, isLoading } = useQuery({
+    queryKey: ["getProductCard"],
+    queryFn: getProductCard,
+  });
+
+=======
+>>>>>>> 770f9a5e52d0a4693cac5ef0fe9785f08af593bc
   return (
     <div>
       {/* Hero */}
@@ -186,12 +266,16 @@ const ProductList = () => {
           </aside>
 
           <div className="ml-10 w-full">
+<<<<<<< HEAD
             <div className="grid grid-cols-1  lg:grid-cols-2 gap-3 ">
               {!isLoading &&
                 data.data.map((product: any) => (
                   <CategoryCard meal={product} />
                 ))}
             </div>
+=======
+            <ProductCard />
+>>>>>>> 770f9a5e52d0a4693cac5ef0fe9785f08af593bc
           </div>
         </div>
       </div>

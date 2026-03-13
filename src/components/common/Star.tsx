@@ -1,4 +1,4 @@
-function Stars({ value }: { value: number }) {
+function Stars({ value = 5 }: { value: number }) {
   return (
     <div className="flex items-center ">
       {Array.from({ length: 5 }, (_, i) => {

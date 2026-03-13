@@ -6,6 +6,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+
 import CategoryCard from "../common/MainCard";
 import { useCategoryMeals } from "@/hooks/useCategoryMeals";
 import { Skeleton } from "@/components/ui/skeleton";

@@ -12,17 +12,9 @@ interface Props {
 }
 
 const ProfileImage = ({ profileData }: Props) => {
-  const { mutate, isPending, isError } = useUpdateImage();
+  const { mutate, isPending } = useUpdateImage();
 
   const { register } = useForm<ProfileImage>();
-
-  function onSubmit(data: ProfileImage) {
-    const file = data.image[0];
-
-    if (file) {
-      mutate({ image: file });
-    }
-  }
   return (
     <div>
       <div className="mt-8">

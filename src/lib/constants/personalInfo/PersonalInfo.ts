@@ -1,29 +1,28 @@
-import type { notificationsSection } from "@/lib/types/personalInfo";
+import { Mail, Phone, User } from "lucide-react";
 
-export const notificationSections: notificationsSection[] = [
+export const formFields = [
   {
-    title: "Orders Updates",
-    items: [
-      { label: "Order Confirmation", checked: false },
-      { label: "Order Shipped", checked: true },
-      { label: "Delivery Updates", checked: false },
-      { label: "Out-of-Stock Alerts", checked: true },
-    ],
+    name: "firstname",
+    label: "First Name",
+    type: "text",
+    icon: User,
   },
   {
-    title: "Communication",
-    items: [
-      { label: "Email Notifications", checked: false },
-      { label: "SMS Notifications", checked: true },
-      { label: "Push Notifications", checked: false },
-    ],
+    name: "lastname",
+    label: "Last Name",
+    type: "text",
+    icon: User,
   },
   {
-    title: "Account Reminders",
-    items: [
-      { label: "Cart Reminders", checked: false },
-      { label: "Payment & Billing Notifications", checked: true },
-      { label: "Account Security Alerts", checked: false },
-    ],
+    name: "email",
+    label: "Email Address",
+    type: "email",
+    icon: Mail,
   },
-];
+  {
+    name: "phone",
+    label: "Phone Number",
+    type: "tel",
+    icon: Phone,
+  },
+] as const;
