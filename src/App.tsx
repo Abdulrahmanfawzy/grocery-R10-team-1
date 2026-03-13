@@ -23,20 +23,12 @@ import Home from "./pages/Home";
 import ProductDetails from "./pages/ProductDetails";
 import CartPage from "./pages/CartPage";
 import ProductList from "./product-list/productlist";
-<<<<<<< HEAD
-import Home from "./pages/Home";
-import LoginPage from "./pages/authorization/login/LoginPage";
-import SignUpPage from "./pages/authorization/signup/SignUpPage";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Toaster } from 'react-hot-toast';
-import ProtectedRoute from "./components/common/ProtectedRoute";
-import PublicRoute from "./components/common/PublicRoute";
-=======
+
 import CheckoutLayOut from "./components/layout/checkout/CheckoutLayOut";
 import CheckoutPage1 from "./pages/Checkout/CheckoutPage1";
 import CheckoutPage2 from "./pages/Checkout/CheckoutPage2";
 import CheckoutPage3 from "./pages/Checkout/CheckoutPage3";
->>>>>>> aed336ec4dfefb25b2d5a40af8e63da8dbc8f886
+
 
 function App() {
   const queryClient = new QueryClient();

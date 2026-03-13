@@ -13,6 +13,8 @@ import { useNavigate } from "react-router-dom";
 import { getCard } from "@/lib/api/checkout";
 import { checkout } from "@/lib/api/checkout";
 import { useState } from "react";
+import { Elements } from "@stripe/react-stripe-js";
+import { stripePromise } from "@/stripe";
 
 type schemaType = z.infer<typeof schema>;
 
@@ -92,32 +94,34 @@ function CheckoutLayOut() {
   }
 
   return (
-    <div className="max-w-5xl 2xl:max-w-6xl mx-auto p-4">
-      <Navbar />
-      {isLoading ? (
-        <div className=" h-96 flex items-center justify-center">
-          <Spinner className=" size-10 text-DarkBlue-color" />
-        </div>
-      ) : (
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <Outlet
-            context={{
-              onSubmit,
-              setValue,
-              getValues,
-              formState,
-              register,
-              trigger,
-              cartData,
-              submitLoding,
-              order,
-              addres,
-              setaddres,
-            }}
-          />
-        </form>
-      )}
-    </div>
+    <Elements stripe={stripePromise}>
+      <div className="max-w-5xl 2xl:max-w-6xl mx-auto p-4">
+        <Navbar />
+        {isLoading ? (
+          <div className=" h-96 flex items-center justify-center">
+            <Spinner className=" size-10 text-DarkBlue-color" />
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <Outlet
+              context={{
+                onSubmit,
+                setValue,
+                getValues,
+                formState,
+                register,
+                trigger,
+                cartData,
+                submitLoding,
+                order,
+                addres,
+                setaddres,
+              }}
+            />
+          </form>
+        )}
+      </div>
+    </Elements>
   );
 }
 

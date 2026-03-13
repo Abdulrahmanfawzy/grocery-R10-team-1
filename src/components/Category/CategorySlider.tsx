@@ -6,23 +6,8 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import type { MeatCategory } from "@/components/Types/Category";
-import type { Product } from "@/types/home/product";
+
 import CategoryCard from "../common/MainCard";
-<<<<<<< HEAD
-
-type CategorySliderItem = MeatCategory | Product;
-
-type CategorySliderProps = {
-  categoryName: string;
-  Items: CategorySliderItem[];
-};
-
-export default function CategorySlider({
-  categoryName,
-  Items,
-}: CategorySliderProps) {
-=======
 import { useCategoryMeals } from "@/hooks/useCategoryMeals";
 import { Skeleton } from "@/components/ui/skeleton";
 
@@ -54,7 +39,6 @@ export default function CategorySlider({ categoryId }: { categoryId: number }) {
     return null;
   }
 
->>>>>>> aed336ec4dfefb25b2d5a40af8e63da8dbc8f886
   return (
     <div className="max-w-6xl mx-auto my-10">
       <h2 className="text-lg font-semibold mb-4">{category?.name}</h2>

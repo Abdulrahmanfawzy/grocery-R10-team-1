@@ -17,7 +17,7 @@ function CartSummary({cartData}) {
   return (
 
       <div className=" w-full bg-white  flex flex-col gap-3">
-        <div className="  overflow-y-auto scrollbar-style max-h-96">
+        <div className="  overflow-y-auto scrollbar-style max-h-96 min-h-52">
           {cartData.items.map((product , index ) => (
             <CreatProductCart islastProduct= {index === cartData.items.length-1} key={product.id} product={product} />
           ))}
