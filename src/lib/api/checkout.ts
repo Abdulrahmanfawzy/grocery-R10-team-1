@@ -13,7 +13,7 @@ export async function getCard() {
 export async function getAddresses() {
   try {
     const {data} = await axiosInstance.get(`/api/addresses`)
-    return data;
+    return data;  
 
   } catch (error) {
     console.error( error);

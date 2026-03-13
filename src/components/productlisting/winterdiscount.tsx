@@ -7,7 +7,7 @@ const TimeBox = ({ value }: { value: number }) => {
             {formatted.split("").map((digit, i) => (
                 <div
                     key={i}
-                    className="w-7 h-10 bg-[#FFFFFF] text-[#000000] flex items-center justify-center rounded-[12px] font-semibold shadow"
+                    className="w-6 sm:w-7 h-8 sm:h-10 bg-[#FFFFFF] text-[#000000] flex items-center justify-center rounded-[8px] sm:rounded-[12px] font-semibold shadow text-sm sm:text-base"
                 >
                     {digit}
                 </div>
