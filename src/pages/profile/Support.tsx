@@ -4,14 +4,16 @@ import Contact from "@/components/profile/support/Contact";
 import FAQS from "@/components/profile/support/FAQS";
 import Report from "@/components/profile/support/Report";
 import { useGetContact } from "@/lib/api/profile/support/use-getContactInfo";
+import { useGetFAQ } from "@/lib/api/profile/support/use-getFAQ";
 import type { ContactInterface } from "@/types/profile/contact/ContactTypes";
 
 const Support = () => {
   const { data, isError, isLoading } = useGetContact();
+  const {data:instructions, isLoading:faqLoading, isError:faqError} = useGetFAQ()
   const contact: ContactInterface = data;
 
-  if (isLoading) return <Loading />;
-  if (isError) return <Error error={data.message} />;
+  if (isLoading || faqLoading) return <Loading />;
+  if (isError || faqError) return <Error error={data.message} />;
   return (
     <>
       <div>
@@ -23,7 +25,7 @@ const Support = () => {
       {/* Contact */}
       <Contact contactInfo={contact} />
       {/* FAQ */}
-      <FAQS />
+      <FAQS instructions={instructions}/>
       {/* Report an Issue */}
       <Report />
     </>

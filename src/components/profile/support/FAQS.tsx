@@ -1,25 +1,11 @@
-import { Button } from "@/components/ui/button";
-import { ChevronRight, HelpCircle } from "lucide-react";
-const instructions = [
-  {
-    q: "How do I track my order?",
-    a: "Go to Order History and click on any order to see real-time tracking.",
-  },
-  {
-    q: "What is your return policy?",
-    a: "We accept returns within 7 days for non-perishable items in original packaging.",
-  },
-  {
-    q: "How do I cancel my subscription?",
-    a: "Visit the Subscriptions page and click Cancel on any active subscription.",
-  },
-  {
-    q: "Do you deliver on weekends?",
-    a: "Yes! We deliver 7 days a week including holidays.",
-  },
-];
+import type { FAQInterface } from "@/types/profile/support/FAQTypes";
+import { HelpCircle } from "lucide-react";
 
-const FAQS = () => {
+interface Props {
+  instructions: FAQInterface;
+}
+
+const FAQS = ({ instructions }: Props) => {
   return (
     <div>
       <div className="bg-card rounded-lg border border-border p-6">
@@ -30,16 +16,17 @@ const FAQS = () => {
           </h2>
         </div>
         <div className="space-y-3">
-          {instructions.map((inst) => (
-            <div key={inst.q} className="bg-muted rounded-lg p-4">
-              <p className="text-sm font-semibold text-primary">{inst.q}</p>
-              <p className="text-sm text-muted-foreground mt-1">{inst.a}</p>
+          {instructions.data.data.slice(0,5).map((inst) => (
+            <div key={inst.id} className="bg-muted rounded-lg p-4">
+              <p className="text-sm font-semibold text-primary">
+                {inst.question}
+              </p>
+              <p className="text-sm text-muted-foreground mt-1">
+                {inst.answer}
+              </p>
             </div>
           ))}
         </div>
-        <Button className="mt-4">
-          View All FAQs <ChevronRight className="w-4 h-4" />
-        </Button>
       </div>
     </div>
   );
