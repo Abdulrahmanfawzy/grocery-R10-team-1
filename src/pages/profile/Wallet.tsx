@@ -1,11 +1,27 @@
+import Error from "@/components/common/Error";
+import Loading from "@/components/common/Loading";
+import PaymentHistory from "@/components/profile/payment/PaymentHistory";
+import PaymentsMethod from "@/components/profile/payment/PaymentsMethod";
 import { Button } from "@/components/ui/button";
-import { paymentHistory, paymentMethod } from "@/lib/constants/paymentsWallet/MockData";
-import { Banknote, ChevronRight, Download, Plus, Smartphone, Wallet2 } from "lucide-react";
-
+import { useGetDashboard } from "@/lib/api/profile/dashboardApi/use-getDashboard";
+import { useGetPaymentsHistory } from "@/lib/api/profile/paymentsApi/use-getPayments";
+import type { DashboardData } from "@/types/profile/dashboard/DashboardData";
+import { Download } from "lucide-react";
 
 const Wallet = () => {
+  const { data, isLoading, isError } = useGetPaymentsHistory();
+  const {
+    data: dashboard,
+    isPending,
+    isError: dashboardError,
+  } = useGetDashboard();
+
+  if (isLoading || isPending) return <Loading />;
+  if (isError || dashboardError) return <Error error={data.message} />;
+
+  const dashboardData: DashboardData = dashboard.data;
   return (
-    <div>
+    <>
       <div>
         <h1 className="text-2xl font-bold text-foreground">Payment & Wallet</h1>
         <p className="text-muted-foreground text-sm mt-1">
@@ -16,108 +32,17 @@ const Wallet = () => {
       {/* Store Credit */}
       <div className="bg-primary rounded-lg flex flex-col gap-3 p-6 mt-4 text-primary-foreground border-2 border-accent">
         <p className="text-3xl">Store Credit</p>
-        <p className="text-sm font-bold mt-1 mb-0">£12.50</p>
-        <p className="  mt-2">
-          Available for your next purchase • Expires: Dec 31, 2025
+        <p className="text-sm font-bold mt-1 mb-0">
+          £{dashboardData.overview.store_credits}
         </p>
+        <p className="  mt-2">Available for your next purchase</p>
       </div>
-      {/* Store Credit */}
 
-      {/* Saved Cards & Other Payment Methods */}
-      <div className="bg-card rounded-lg border border-border p-6 my-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <h2 className="font-semibold text-card-foreground mb-4">
-              Saved Cards
-            </h2>
-            <div className="space-y-3">
-              <div className="flex items-center gap-3 border border-border rounded-lg p-3">
-                <span className="text-xs font-bold bg-muted px-2 py-1 rounded">
-                  VISA
-                </span>
-                <div>
-                  <p className="text-sm font-medium text-card-foreground">
-                    Visa •••• 4242
-                  </p>
-                  <p className="text-xs text-muted-foreground">Expires 12/25</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-3 border-2 border-primary rounded-lg p-3">
-                <span className="text-xs font-bold bg-destructive/20 text-destructive px-2 py-1 rounded">
-                  MC
-                </span>
-                <div>
-                  <p className="text-sm font-medium text-card-foreground">
-                    Mastercard •••• 8888
-                  </p>
-                  <p className="text-xs text-muted-foreground">Expires 08/26</p>
-                </div>
-              </div>
-              <button className="flex items-center gap-2 text-sm text-muted-foreground hover:text-card-foreground border border-dashed border-border rounded-lg p-3 w-full">
-                <Plus className="w-4 h-4" /> Add New Card
-              </button>
-            </div>
-          </div>
-
-          <div>
-            <h2 className="font-semibold text-card-foreground mb-4">
-              Other Payment Methods
-            </h2>
-            <div className="space-y-3">
-              {paymentMethod.map((method) => (
-                <div
-                  key={method.label}
-                  className="flex items-center gap-3 border border-border rounded-lg p-3"
-                >
-                  <method.icon className="w-5 h-5 text-muted-foreground" />
-                  <div>
-                    <p className="text-sm font-medium text-card-foreground">
-                      {method.label}
-                    </p>
-                    <p className="text-xs text-muted-foreground">
-                      {method.desc}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-      {/* Saved Cards & Other Payment Methods */}
+      {/* Saved Cards Other Payment Methods */}
+      <PaymentsMethod />
 
       {/* Payment History */}
-      <div className="bg-card rounded-lg border border-border p-6">
-        <h2 className="font-semibold text-card-foreground mb-4">
-          Payment History
-        </h2>
-        <div className="space-y-3">
-          {paymentHistory.map((tx) => (
-            <div
-              key={tx.order + tx.date}
-              className="flex items-center justify-between border border-border rounded-lg p-3"
-            >
-              <div>
-                <p className="text-sm font-medium text-card-foreground">
-                  {tx.order}
-                </p>
-                <p className="text-xs text-muted-foreground">{tx.date}</p>
-              </div>
-              <div className="text-right">
-                <p
-                  className={`text-sm font-semibold ${tx.refund ? "text-primary" : "text-card-foreground"}`}
-                >
-                  {tx.amount}
-                </p>
-                <span className="text-xs text-success">Completed</span>
-              </div>
-            </div>
-          ))}
-        </div>
-        <Button className="mt-4">
-          View All Transactions <ChevronRight className="w-4 h-4" />
-        </Button>
-      </div>
+      <PaymentHistory paymentHistory={data.data} />
 
       {/* Receipt & Invoice */}
       <div className="bg-card rounded-lg border border-border p-6 mt-4">
@@ -132,7 +57,7 @@ const Wallet = () => {
         </Button>
       </div>
       {/* Receipt & Invoice */}
-    </div>
+    </>
   );
 };
 

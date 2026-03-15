@@ -172,7 +172,13 @@
 * {
   box-sizing: border-box;
   list-style: none;
+  
 }
+.scrollbar-style {
+  scrollbar-width: auto; 
+  scrollbar-color: #014162 transparent;
+}
+
 body {
   font-family: "Inter", sans-serif;
   background-color: #fff;
@@ -184,4 +190,7 @@ body {
 }
 .background-DarkBlue-color {
   background-color: #014162;
+}
+.border-DarkBlue-color {
+  border-color: #014162;
 }

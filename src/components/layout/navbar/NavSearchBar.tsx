@@ -1,35 +1,35 @@
-import { categories } from "@/data/home/categories";
-import { Search } from "lucide-react";
 import { useState } from "react";
+import CategorySelector from "./CategorySelector";
+import NavSearchBarInput from "./NavSearchBarInput";
+import useSearchProducts from "@/hooks/useSearchProduct";
+import SearchBarResult from "./SearchBarResult";
+import type { ProductList } from "@/types/home/product";
 
 const NavSearchBar = () => {
-  const [items, setItems] = useState("");
+  const [query, setQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState<string>("0");
+
+  const { data, isLoading } = useSearchProducts(
+    query,
+    Number(selectedCategory),
+  );
+
+  const products = data?.data ?? [];
+  const showResults = query.trim().length > 2;
 
   return (
     <div className="flex items-center relative">
-      {/* add select items */}
-      <select
-        name="All Categories"
-        id="categories"
-        className="bg-gray-200 py-[10px] px-2 rounded-l-md"
-      >
-        <option value="all">All Categories</option>
-        {categories.map((category) => (
-          <option key={category.id} value={category.name}>
-            {category.name}
-          </option>
-        ))}
-      </select>
-      <input
-        type="text"
-        placeholder="Search for Items..."
-        value={items}
-        onChange={(e) => setItems(e.target.value)}
-        className="bg-gray-200 py-2 px-4 focus:outline-none focus:ring- focus:ring-main  w-64"
+      <CategorySelector
+        selectedCategory={selectedCategory}
+        setSelectedCategory={setSelectedCategory}
       />
-      <button className="px-4 py-2 bg-primary text-white rounded-r-md ">
-        <Search className="h-6 w-6" />
-      </button>
+      <NavSearchBarInput query={query} setQuery={setQuery} />
+      {showResults && (
+        <SearchBarResult
+          products={products as ProductList}
+          isLoading={isLoading}
+        />
+      )}
     </div>
   );
 };

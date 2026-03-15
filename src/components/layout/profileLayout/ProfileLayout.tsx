@@ -1,16 +1,38 @@
-import SideBar from '@/components/common/sideBar/SideBar'
-import React from 'react'
-import { Outlet } from 'react-router-dom'
+import Error from "@/components/common/Error";
+import Loading from "@/components/common/Loading";
+import MobileSideBar from "@/components/common/sideBar/MobileSideBar";
+import SideBar from "@/components/common/sideBar/SideBar";
+import { Button } from "@/components/ui/button";
+import { useGetProfile } from "@/lib/api/profile/personalInfoApi/use-getProfile";
+import { Menu } from "lucide-react";
+import { useState } from "react";
+import { Outlet } from "react-router-dom";
 
 function ProfileLayout() {
+  const { data, isLoading, isError } = useGetProfile();
+
+  const [open, setOpen] = useState(false);
+  function onClose() {
+    setOpen((prev) => !prev);
+  }
+
+  if (isLoading) return <Loading />;
+  if (isError || !data) return <Error error={data.message} />;
+
   return (
-    <div className='flex lg:max-w-4xl md:max-w-7xl  mx-auto my-10'>
-        <SideBar/>
-        <main className='flex-1 p-5'>
-        <Outlet/>
-        </main>
+    <div className="relative flex lg:max-w-5xl md:max-w-7xl w-screen mx-auto  my-10 lg:gap-5">
+      <div className="sticky top-0 left-0  lg:hidden ">
+        <Button onClick={onClose} className="border rounded-lg  ">
+          <Menu className="" />
+        </Button>
+      </div>
+      <MobileSideBar onClose={onClose} open={open} profileData={data.data} />
+      <SideBar profileData={data.data} />
+      <main className="flex-1 p-5 lg:p-0 ">
+        <Outlet context={data.data} />
+      </main>
     </div>
-  )
+  );
 }
 
-export default ProfileLayout
+export default ProfileLayout;
