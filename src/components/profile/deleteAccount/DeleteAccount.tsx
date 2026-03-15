@@ -19,7 +19,7 @@ import {
   contactSchema,
   useDeleteAccount,
   type ContactFormValues,
-} from "@/lib/api/profile/security/use-deleteAccount";
+} from "@/lib/api/profile/personalInfoApi/use-deleteAccount";
 
 function DeleteAccount() {
   const { mutate, isPending } = useDeleteAccount();

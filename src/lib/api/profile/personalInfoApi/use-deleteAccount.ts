@@ -29,6 +29,7 @@ export function useDeleteAccount() {
     onSuccess: () => {
       successToast("Account deleted successfully");
       localStorage.removeItem("token");
+      window.location.reload()
     },
     onError: () => errorToast("Failed to delete your account"),
   });
